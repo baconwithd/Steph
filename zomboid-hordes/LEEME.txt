@@ -1,7 +1,25 @@
-ZOMBOID HORDES 1.1.0 — NeoForge 1.21.1
+ZOMBOID HORDES 1.2.0 — NeoForge 1.21.1
 
-NOVEDADES 1.1.0 — ADULTOS, HERIDAS Y MORDIDAS
-Quita el addon 1.0.0/1.0.1 y deja solo el 1.1.0. Se conserva la corrección de arranque de Mixin y los eventos de helicóptero/hordas.
+NOVEDADES 1.2.0 — IMPULSO, AVISOS Y PRUEBAS
+Al golpear cuerpo a cuerpo con impulso de carrera: +25% de daño. Corriendo y saltando: +50%. Hace falta desplazarse corriendo durante varios ticks; activar sprint estando quieto no da bonus. Se excluyen vehículos, agua, escalada y vuelo. El bonus se aplica al golpe, no a balas disparadas mientras corres. El impacto con impulso también aturde algo más.
+Todas las hordas del addon anuncian su inicio en el chat de los jugadores cercanos, incluido el helicóptero y las patrullas nocturnas. La actividad diurna tiene su aviso, sin música de horda.
+Todas las noches se programa una horda ligera de 8 por zona, +2 por jugador cercano, máximo 16. Llegan de 2 en 2 cada 6 segundos. Esta llamada nocturna solo moviliza un pequeño número de zombis existentes; no alerta toda la ciudad.
+De día se programan grupos normales de 2 cada 4 minutos, sin localizar al jugador automáticamente. Se frena la aparición de zombis normales nuevos cerca de jugadores cuando ya hay 10. No elimina los zombis guardados ni aplica ese límite a las hordas de ruido/helicóptero, comandos, huevos y spawners con motivo de aparición identificado.
+La configuración anterior se migra una vez: nightZombies pasa a 8 y se añaden los ajustes de día/noches tranquilas. Los demás valores se conservan. Después puedes personalizarlos y no volverán a sobrescribirse en cada inicio.
+
+COMANDOS DE PRUEBA
+Requieren permisos de operador (nivel 2) o trucos. Ejecútalos como jugador en supervivencia, en el Overworld, fuera de Pacífico, con doMobSpawning=true.
+/zhorda dia — prueba el pequeño grupo diurno.
+/zhorda noche — prueba la horda nocturna ligera.
+/zhorda ruido — prueba la horda por ruido.
+/zhorda helicoptero — reproduce el helicóptero y programa su horda.
+/zhorda estado — muestra las oleadas y zombis pendientes.
+/zhorda parar — cancela oleadas pendientes cercanas; no mata zombis ya aparecidos.
+Los comandos fuerzan el inicio sin esperar la tirada diaria ni cambiar la hora del mundo. Usan las mismas oleadas, sonidos, avisos y comprobaciones de suelo/chunks/límites que los eventos normales. Una prueba sustituye las oleadas pendientes de tu zona para que puedas probar otro tipo. No cambia la tirada diaria del helicóptero ni borra mobs.
+Conviene probar día, noche, ruido y helicóptero en ese orden, o en zonas distintas: los zombis de una prueba anterior siguen contando para los límites. Si una oleada queda pendiente, busca espacio con suelo válido o despeja los zombis cercanos; no se fuerzan apariciones dentro de paredes.
+
+COMBATE CONSERVADO — ADULTOS, HERIDAS Y MORDIDAS
+Quita cualquier addon Zomboid Hordes anterior y deja solo el 1.2.0. Se conserva la corrección de arranque de Mixin y los eventos de helicóptero/hordas.
 No aparecen zombis bebés. Los bebés guardados se convierten en adultos al cargarse, sin eliminarlos. Se aplica a Zombie y sus variantes heredadas.
 Los impactos efectivos producen heridas persistentes. Cabeza: +50% de daño cuerpo a cuerpo y 30% adicional de posibilidad de fallar una mordida por golpe, máximo 90%. Los mods de armas conservan su propio multiplicador de disparo a la cabeza, sin duplicarlo.
 Piernas: reducción progresiva de velocidad; brazos: reducción progresiva de fuerza. Cualquier pérdida de salud también debilita al zombi. Las reducciones tienen límite y no se acumulan cada tick ni le curan.
@@ -10,7 +28,7 @@ Para morder a un jugador necesita al menos 20 ticks (un segundo de juego) seguid
 La zona se estima con el rayo de apuntado del ataque y, cuando el proyectil permite leerlo, su trayectoria contra la hitbox. No es un modelo de huesos independiente ni cambia visualmente la mandíbula; los golpes indirectos sin punto identificable se consideran del torso.
 
 INSTALACIÓN
-Cierra Minecraft. Añade zomboid-hordes-1.1.0-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
+Cierra Minecraft. Añade zomboid-hordes-1.2.0-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
 Conserva los JAR originales que enviaste: SoundAttract 6.3.8d, Weaker Day Zombie 1.0.0, Horde Hoard 1.1.0, Zombie Awareness, ZombieChaos, Zombie Variants y Zombie Remains Loot 1.2.1. Sus dependencias habituales siguen siendo necesarias. Este addon requiere NeoForge 21.1.255 o posterior de la serie 21.1 y SoundAttract 6.3.8d.
 No reemplaza Zombie Remains Loot: los zombis de las oleadas siguen pasando por sus eventos normales de muerte y cadáveres.
 
@@ -20,7 +38,7 @@ Si sale, ocurre en un momento aleatorio del día; al entrar tarde puede ocurrir 
 El sobrevuelo dura unos 40 segundos. Mientras tanto, atrae zombis existentes y sigue la zona del jugador. Llegan hasta 220 zombis por oleadas para un jugador; +80 por jugador cercano, máximo 400. Los jugadores separados no multiplican la probabilidad diaria.
 
 HORDAS Y RUIDO
-Cada noche llega un grupo de 32 por zona de jugadores, con hasta 12 adicionales por jugador cercano y máximo 96. También hay posibilidad de patrullas nocturnas pequeñas cada 90 segundos.
+Cada noche llega una horda ligera de 8 por zona, +2 por jugador cercano, máximo 16. También hay un 25% de posibilidad de una patrulla de 3 cada 135 segundos.
 Disparar, provocar explosiones o correr cerca de al menos 6 zombis acumula ruido y puede traer una horda de 24. Hay 2 minutos de espera entre hordas por ruido de un mismo jugador. Una horda activa en la misma zona absorbe esos avisos.
 Los disparos se cuentan desde el evento real de TACZ. Se conserva el alcance calculado por SoundAttract para el arma y sus accesorios: los silenciadores siguen ayudando. No se cuenta el minuto durante el que SoundAttract recuerda un único disparo como si fueran disparos nuevos.
 El alcance de investigación aumenta 50%, hasta 192 bloques. Los zombis investigan la última posición audible; fuera del sobrevuelo necesitan verte para fijar tu posición actual. Agacharse evita el ruido adicional de correr cerca del grupo. Se aumentan también las respuestas al sonido de Zombie Awareness durante la sesión.
@@ -34,17 +52,17 @@ Weaker Day Zombie conserva su JAR, pero este addon sustituye su inmovilización 
 Horde Hoard conserva sus comportamientos de combate y apilamiento. Se sustituyen su horda aleatoria de medianoche y la multiplicación por excavación para que las oleadas tengan un único controlador.
 
 LÍMITES Y CONFIGURACIÓN
-Por defecto se añaden hasta 8 zombis cada 2 segundos, sin generar chunks nuevos. Se comprueban suelo, colisiones, líquidos y distancia mínima de 24 bloques a jugadores. Si no hay sitios válidos, la oleada espera.
+Para helicóptero/ruido se añaden hasta 8 zombis cada 2 segundos; las hordas nocturnas llegan de 2 en 2 cada 6 segundos. No se generan chunks nuevos. Se comprueban suelo, colisiones, líquidos y distancia mínima de 24 bloques a jugadores. Si no hay sitios válidos, la oleada espera.
 Se pausa al llegar a 180 zombis cercanos o 320 zombis del evento activos en el mundo. Las oleadas expiran después de 8 minutos: los 220/400 son un presupuesto total, no una garantía de que aparezcan todos de golpe. Escapar lejos de la última zona audible detiene nuevas apariciones allí.
 No inicia eventos en Pacífico, con doMobSpawning=false, ni para jugadores creativos/espectadores.
 El primer inicio crea config/zomboid-hordes.json. Ajusta probabilidad, tamaños, límites, espera y fuerza/velocidad allí; reinicia después. No sobrescribe tus configuraciones de otros mods.
 
 VALIDACIÓN
-Compilado para Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255. Pasaron 42 pruebas de probabilidad, calendario, cambio de fase, límites multijugador, alcance y validación de configuración; 15 comprobaciones de firmas contra los JAR originales; y verificación de estructura/pila del bytecode de las 18 clases. Recursos, mixins, metadatos y ambos OGG comprobados. Los stubs de compilación no están incluidos en el mod.
-Además, pasaron 23 pruebas de heridas, zonas de impacto y preparación de mordida; las siete clases Mixin y ocho inyecciones tienen las retenciones esperadas por el cargador.
+Compilado para Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255. Pasaron 42 pruebas de probabilidad, calendario, cambio de fase, límites multijugador, alcance y validación de configuración; 15 comprobaciones de firmas contra los JAR originales; y verificación de estructura/pila del bytecode de las 19 clases. Recursos, mixins, metadatos y ambos OGG comprobados. Se comprobó la migración de configuración antigua y la conservación de personalizaciones posteriores. Las firmas de comandos se contrastaron con Brigadier. Los stubs de compilación no están incluidos en el mod.
+Además, pasaron 27 pruebas de heridas, zonas de impacto y preparación de mordida; las siete clases Mixin y ocho inyecciones tienen las retenciones esperadas por el cargador.
 No se ha iniciado Minecraft en este entorno: las pruebas no sustituyen una comprobación de jugabilidad y rendimiento en tu pack.
-Para comprobar el evento rápidamente en un mundo de prueba, pon helicopterChance=1.0, reinicia y usa /time add 24000. Cambia a supervivencia; el evento llegará durante ese día. Después restaura 0.15.
+Para comprobar los eventos sin modificar la probabilidad, utiliza los comandos anteriores. Para comprobar la programación natural nocturna en un mundo de prueba, entra en una noche de un día nuevo; no se vuelve a tirar la misma noche al retroceder el reloj.
 Prueba sol directo, cambios de día/noche, disparos con/sin silenciador, correr cerca de grupos, y reiniciar tras una tirada. Si ocurre un cierre, el informe permitirá comprobar la integración concreta.
 
 FUENTES
-zomboid-hordes-1.1.0-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
+zomboid-hordes-1.2.0-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
