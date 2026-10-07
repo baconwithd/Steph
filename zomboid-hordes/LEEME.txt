@@ -1,10 +1,16 @@
-ZOMBOID HORDES 1.0.1 — NeoForge 1.21.1
+ZOMBOID HORDES 1.1.0 — NeoForge 1.21.1
 
-CORRECCIÓN 1.0.1
-Corrige el cierre de arranque «SunProtectionMixin is missing an @Mixin annotation»: @Mixin debe estar en RuntimeInvisibleAnnotations (retención CLASS). Se corrigieron las cinco clases de integración y el stub utilizado para reconstruirlas. El comportamiento y los sonidos se conservan. Quita el addon 1.0.0 y deja solo el 1.0.1.
+NOVEDADES 1.1.0 — ADULTOS, HERIDAS Y MORDIDAS
+Quita el addon 1.0.0/1.0.1 y deja solo el 1.1.0. Se conserva la corrección de arranque de Mixin y los eventos de helicóptero/hordas.
+No aparecen zombis bebés. Los bebés guardados se convierten en adultos al cargarse, sin eliminarlos. Se aplica a Zombie y sus variantes heredadas.
+Los impactos efectivos producen heridas persistentes. Cabeza: +50% de daño cuerpo a cuerpo y 30% adicional de posibilidad de fallar una mordida por golpe, máximo 90%. Los mods de armas conservan su propio multiplicador de disparo a la cabeza, sin duplicarlo.
+Piernas: reducción progresiva de velocidad; brazos: reducción progresiva de fuerza. Cualquier pérdida de salud también debilita al zombi. Las reducciones tienen límite y no se acumulan cada tick ni le curan.
+Impactos: aturdimiento breve de 0,3–0,6 segundos, mayor en la cabeza. Se detiene la navegación y no puede atacar durante ese tiempo.
+Para morder a un jugador necesita al menos 20 ticks (un segundo de juego) seguidos dentro de su alcance cuerpo a cuerpo y con línea de visión. Separarse, cambiar de objetivo o recibir un impacto reinicia la preparación. Se conserva además el intervalo de ataque vanilla. Con lag, un segundo de juego puede tardar más en tiempo real.
+La zona se estima con el rayo de apuntado del ataque y, cuando el proyectil permite leerlo, su trayectoria contra la hitbox. No es un modelo de huesos independiente ni cambia visualmente la mandíbula; los golpes indirectos sin punto identificable se consideran del torso.
 
 INSTALACIÓN
-Cierra Minecraft. Añade zomboid-hordes-1.0.1-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
+Cierra Minecraft. Añade zomboid-hordes-1.1.0-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
 Conserva los JAR originales que enviaste: SoundAttract 6.3.8d, Weaker Day Zombie 1.0.0, Horde Hoard 1.1.0, Zombie Awareness, ZombieChaos, Zombie Variants y Zombie Remains Loot 1.2.1. Sus dependencias habituales siguen siendo necesarias. Este addon requiere NeoForge 21.1.255 o posterior de la serie 21.1 y SoundAttract 6.3.8d.
 No reemplaza Zombie Remains Loot: los zombis de las oleadas siguen pasando por sus eventos normales de muerte y cadáveres.
 
@@ -34,11 +40,11 @@ No inicia eventos en Pacífico, con doMobSpawning=false, ni para jugadores creat
 El primer inicio crea config/zomboid-hordes.json. Ajusta probabilidad, tamaños, límites, espera y fuerza/velocidad allí; reinicia después. No sobrescribe tus configuraciones de otros mods.
 
 VALIDACIÓN
-Compilado para Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255. Pasaron 42 pruebas de probabilidad, calendario, cambio de fase, límites multijugador, alcance y validación de configuración; 13 comprobaciones de firmas contra los JAR originales; y verificación de estructura/pila del bytecode de las 14 clases. Recursos, mixins, metadatos y ambos OGG comprobados. Los stubs de compilación no están incluidos en el mod.
-Además, una prueba de regresión reproduce la falta de @Mixin en 1.0.0 y comprueba las cinco clases y seis inyecciones de 1.0.1. Se compararon las retenciones con los fuentes de SpongePowered/Mixin y las anotaciones de SoundAttract. Solo cambian cinco anotaciones y la versión del JAR.
+Compilado para Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255. Pasaron 42 pruebas de probabilidad, calendario, cambio de fase, límites multijugador, alcance y validación de configuración; 15 comprobaciones de firmas contra los JAR originales; y verificación de estructura/pila del bytecode de las 18 clases. Recursos, mixins, metadatos y ambos OGG comprobados. Los stubs de compilación no están incluidos en el mod.
+Además, pasaron 23 pruebas de heridas, zonas de impacto y preparación de mordida; las siete clases Mixin y ocho inyecciones tienen las retenciones esperadas por el cargador.
 No se ha iniciado Minecraft en este entorno: las pruebas no sustituyen una comprobación de jugabilidad y rendimiento en tu pack.
 Para comprobar el evento rápidamente en un mundo de prueba, pon helicopterChance=1.0, reinicia y usa /time add 24000. Cambia a supervivencia; el evento llegará durante ese día. Después restaura 0.15.
 Prueba sol directo, cambios de día/noche, disparos con/sin silenciador, correr cerca de grupos, y reiniciar tras una tirada. Si ocurre un cierre, el informe permitirá comprobar la integración concreta.
 
 FUENTES
-zomboid-hordes-1.0.1-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
+zomboid-hordes-1.1.0-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
