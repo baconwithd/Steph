@@ -1,7 +1,7 @@
-ZOMBIE REMAINS LOOT 1.2.0 — Minecraft 1.21.1 / NeoForge 21.1.255
+ZOMBIE REMAINS LOOT 1.2.1 — Minecraft 1.21.1 / NeoForge 21.1.255
 
 INSTALACIÓN
-Cierra Minecraft. Elimina las versiones 1.0.0/1.1.0 de Zombie Remains Loot y coloca zombie-remains-loot-1.2.0-neoforge-1.21.1.jar.
+Cierra Minecraft. Elimina las versiones anteriores de Zombie Remains Loot y coloca zombie-remains-loot-1.2.1-neoforge-1.21.1.jar.
 No instales ambas versiones a la vez. Conserva Doomsday Decoration y Corpse 1.21.1-1.1.13, junto con tus mods de botín. Conserva TACZ Bandits 1.3, TACZ y FracturePoint originales.
 En multijugador, actualiza servidor y clientes. No requiere KubeJS.
 
@@ -14,8 +14,14 @@ Patrullan juntos, comparten la última posición vista y pueden flanquear. Pierd
 Agachado te detectan a menor distancia (8 bloques); caminando 20; corriendo 32. Las paredes cortan la visión.
 También combaten zombis, que pueden atacarlos. Al recibir daño buscan cobertura alcanzable y alternan ocultarse y asomarse.
 La cobertura depende de los obstáculos y caminos disponibles en el terreno.
-Contra jugadores disparan más despacio y fallan más al moverte; quedarte quieto aumenta su precisión y daño.
-Tienen munición limitada y pausas de recarga: se elimina la reposición infinita del comportamiento original.
+Contra jugadores la cadencia objetivo es una bala cada 5 ticks: 20 disparos en 5 segundos si el arma lo permite y no hay recarga ni cobertura.
+Por cada 20 disparos reales se sortean 2 oportunidades de acertar; los otros 18 se apuntan hacia los lados a baja altura. En modo suave solo hay 1 oportunidad.
+Los disparos que buscan acertar apuntan 80% a piernas y 20% a brazos, adaptando la altura a la postura del jugador. No se apunta intencionadamente a la cabeza.
+No se añade dispersión vertical a los disparos contra jugadores. Moverse aún reduce el daño de un impacto; quedarse quieto sigue siendo más peligroso.
+La geometría, el movimiento, la velocidad de las balas y las mecánicas de First Aid/TACZ determinan qué impactos ocurren y dónde: no se garantizan exactamente 2 heridas ni cero impactos accidentales en la cabeza.
+Disponen de 80–140 disparos de combate según el nivel, manteniendo el botín recuperable en las cantidades pequeñas anteriores.
+La reserva antigua se adapta una sola vez al actualizar, conservando su proporción restante; si estaba agotada, sigue agotada.
+Tienen munición limitada y pausas cortas de recarga: se elimina la reposición infinita del comportamiento original.
 
 PROGRESIÓN Y BOTÍN
 Se recuerda el mejor equipo observado en cada jugador cercano, aunque luego lo guarde.
@@ -86,7 +92,7 @@ El botín sigue incluyendo útiles, ropa de Self Expression, First Aid, melees y
 VALIDACIÓN
 Compilado contra tus archivos de Minecraft 1.21.1 y NeoForge 21.1.255.
 Verificadas las firmas utilizadas de Corpse 1.21.1-1.1.13 por inspección de su JAR.
-Pasaron 16 comprobaciones de configuración, 59 de poses/edad/herramientas y 34 de equilibrio/progresión/sigilo; las 12 recetas, assets y el bytecode se revisaron.
+Pasaron 16 comprobaciones de configuración, 59 de poses/edad/herramientas y 421 de equilibrio/progresión/sigilo/cadencia/puntería baja; las 12 recetas, assets y el bytecode se revisaron.
 No se ha ejecutado una partida completa de Minecraft en este entorno. La integración con tu hotfix de TACZ sigue pendiente de prueba dentro del juego.
 
 PRUEBA RÁPIDA
@@ -103,3 +109,8 @@ Compara correr lateralmente con permanecer quieto, acercarte agachado y ocultart
 Dispara a un grupo junto a obstáculos: comprueba cobertura, coordinación y combate contra zombis.
 Obtén equipo superior y espera: los nuevos grupos deben mejorar; guarda y vuelve a entrar para comprobar la progresión persistente.
 Abre y vuelve a abrir cadáveres de bandidos: objetos dispersos, sin regeneración; destrúyelos para comprobar la pérdida del contenido.
+
+PRUEBA DE PUNTERÍA 1.2.1
+Compara una ráfaga contra un jugador parado y otro moviéndose lateralmente; comprueba en First Aid las heridas de piernas y brazos.
+Prueba también agachado y junto a desniveles: el objetivo de tiro debe quedar por debajo de la cabeza.
+La cadencia depende del RPM real, el cargador, las recargas, cobertura y visibilidad. En las armas lentas puede ser menor.
