@@ -1,0 +1,23 @@
+ZOMBIE REMAINS LOOT 1.3.0 — cadáveres con calidad y minerales
+
+Reemplaza zombie-remains-loot-1.2.1-neoforge-1.21.1.jar por zombie-remains-loot-1.3.0-neoforge-1.21.1.jar. Deja un único JAR de este mod. Instala igual en servidor/clientes y conserva Doomsday Decoration, TACZ, Self Expression, Fracture Point, First Aid y los demás mods. Usa Zomboid Hordes 1.4.0 para el aumento de zombis y alcance. First Aid 3.4.3 sigue siendo compatible.
+
+CALIDADES
+Zombis: común 55%, poco común 25%, raro 14%, épico 5%, legendario 1%.
+Bandidos: común 25%, poco común 35%, raro 25%, épico 12%, legendario 3%.
+El título al abrir muestra «Cuerpo común», «Cuerpo raro», «Cuerpo legendario», etc. Calidad y objetos se deciden una sola vez al morir y se guardan con el cadáver. Reabrirlo/reiniciar no vuelve a tirar loot. Los cadáveres antiguos conservan contenido y se consideran comunes; solo los nuevos reciben las categorías nuevas.
+
+LOOT
+Cada cadáver nuevo tiene utilidad, ropa, curaciones, melee y minerales. Mejor calidad aumenta cantidad y estado del equipo. Los comunes tienen ropa muy gastada y melee básico; raros incluyen mejores artículos del pack; épicos incluyen armadura/melee de diamante y curaciones avanzadas; legendarios incluyen piezas/melee de netherita y curaciones avanzadas. Las prendas civiles de Self Expression se usan en las categorías disponibles. No todos los objetos de un cuerpo legendario son legendarios: conserva utilidades y materiales comunes junto al equipo de calidad.
+Probabilidad de arma para zombis: 12/25/45/70/100% según calidad. Se usan los índices reales de TACZ: pistolas comunes, escopetas/SMG poco comunes, fusiles raros y armas de categoría alta épicas/legendarias, con munición compatible. Si no existe la categoría, se elige la mejor inferior disponible. Se excluyen lanzacohetes/granadas. Cargadores vacíos y munición separada; cantidades suben con calidad.
+Bandidos conservan el arma real y munición compatible, su equipo y loot adicional por calidad. Épicos/legendarios pueden tener un arma extra de categoría alta. Su progresión, sigilo, cooperación, cobertura y puntería contra jugadores siguen funcionando como antes. El loot no cambia el arma con la que estaban combatiendo.
+Todos los cadáveres nuevos incluyen minerales: comunes carbón/cobre; poco comunes hierro/lapis; raros oro/redstone/diamante; épicos diamante/esmeralda/escombros ancestrales; legendarios diamante/fragmentos o lingote de netherita. La netherita como mineral solo está en legendarios. Las piezas se distribuyen en espacios aleatorios del inventario de 27 slots.
+Los campos antiguos de probabilidad de ropa/medicinas/armas ya no controlan la población de cadáveres por calidad; las listas de objetos, herramientas de despellejado, tiempo de descomposición y configuración de bandidos siguen disponibles. Las referencias a mods ausentes se omiten, con alternativas vanilla para las categorías obligatorias.
+
+CADÁVERES CONSERVADOS
+Los modelos que necesitan pared solo aparecen cuando hay soporte válido. Descomposición natural en 24000 ticks (20 minutos a 20 TPS). Clic derecho con espada/cuchillo despelleja por etapas; al llegar a huesos, se recogen con cualquier objeto. Romper restos Doomsday destruye su inventario y da carne/carne podrida o huesos según fase. Los cadáveres de jugadores de Corpse conservan su comportamiento: al destruirlos sueltan el inventario, además de carne/huesos según fase.
+Las recetas de fences/trapdoors que ya incluía el mod se conservan; los slabs se gestionan en Zomboid Hordes 1.4.0.
+
+VALIDACIÓN
+Compilado para Java 21/NeoForge 21.1.255/Minecraft 1.21.1. Pasaron 20000 tiradas de distribución de calidad, límites y categorías minerales/armas, 59 comprobaciones de restos/posición/herramientas, 421 de bandidos y 16 de configuración. Bytecode de las 21 clases verificado; calidad comprobada en guardado/carga. No se ejecutó Minecraft aquí: prueba cadáveres de zombis y bandidos en tu pack.
+Fuentes: zombie-remains-loot-1.3.0-fuentes.zip. Código del addon bajo MIT; no contiene código ni recursos descompilados de los otros mods.
