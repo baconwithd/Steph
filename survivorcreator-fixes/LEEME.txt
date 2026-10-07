@@ -1,0 +1,72 @@
+SURVIVOR CREATOR v11 + eZWeight v7 — Minecraft 1.21.1 / NeoForge 21.1.255
+
+INSTALACIÓN
+Cierra Minecraft. En mods, retira estos dos archivos anteriores:
+- survivorcreator-neoforge-1.21.1-1.0.5-zomboid-v10-categorized-melee-xp.jar
+- eZWeight-neoforge-1.21.1-1.8.4-stamina-v6-vertical-lock.jar
+Coloca los dos JAR de este paquete:
+- survivorcreator-neoforge-1.21.1-1.0.6-zomboid-v11-skills-fixed.jar
+- eZWeight-neoforge-1.21.1-1.8.4-stamina-v7-balanced.jar
+No dejes versiones duplicadas del mismo mod. Conserva Flashlight+ 5.1, Sophisticated Backpacks/Core, Curios, First Aid y los demás mods.
+En multijugador, actualiza servidor y clientes. Conserva tus archivos de configuración y tu mundo.
+Se mantienen las profesiones, rasgos y XP guardados. La muerte conserva el reinicio de personaje que ya hacía Survivor Creator.
+
+NIVEL Y EXPERIENCIA
+La versión anterior incluía SkillEvents sin registro en el bus de eventos: ni su temporizador ni sus acciones automáticas se ejecutaban.
+Ahora quedan registrados sus eventos. El aviso sigue al jugador y desaparece a los 70 ticks (3,5 s); se elimina al morir, cambiar de dimensión o salir.
+Los marcadores antiguos guardados se descartan al volver a cargar el mundo/la zona.
+La XP de sprint exige desplazamiento real, no estar corriendo contra una pared ni viajar en vehículo; las habilidades de sigilo y agilidad también reciben XP al moverse.
+Se conservan los niveles de fuerza, condición física y las categorías de combate cuerpo a cuerpo del archivo anterior.
+
+OFICIOS
+Carpintería: fabricar tablones, vallas, trampillas, escaleras y otros objetos de madera; talar troncos.
+Cocina: preparar recetas de comida y retirar comida cocinada del horno o ahumador mediante los eventos de fabricación/cocción del juego.
+Metalurgia: fabricar piezas/herramientas metálicas y retirar lingotes, aleaciones, vidrio o ladrillos fundidos del horno/alto horno.
+Agricultura: plantar, labrar tierra y romper cultivos maduros; los cultivos inmaduros no dan XP de cosecha.
+Electricidad/costura: fabricar componentes reconocidos por su material/ID; primeros auxilios al terminar de usar suministros médicos compatibles.
+Pesca: pescar objetos; recolección al recoger flores mediante rotura.
+Cada oficio usa la XP y curva de niveles persistente de Survivor Creator; no depende de elegir esa profesión al crear el personaje.
+Carpintería/metalurgia dan +3% de velocidad de trabajo por nivel con sus herramientas, hasta +30%.
+Cocina añade +0,1 de saturación por nivel al comer; agricultura añade 2% por nivel de obtener una unidad adicional de cosecha, hasta 20%.
+El reciclaje de vallas/trampillas no concede XP para evitar fabricar/reciclar indefinidamente.
+Los objetos añadidos por mods se identifican por tipo, componentes, etiquetas e IDs. Mecánicas especiales que no emitan estos eventos pueden necesitar integración adicional.
+La automatización sin jugador no concede XP; en hornos se obtiene al retirar personalmente el resultado.
+
+LINTERNAS Y TRAMPILLAS
+Al confirmar un personaje nuevo, cada jugador recibe flashlight:flashlight_off y su batería se recarga al 100%.
+No vuelve a concederse por reconectar ni cambiar una profesión ya confirmada. Los personajes nuevos tras morir sí la reciben.
+Una trampilla de madera de Minecraft produce 2 tablones de su misma madera mediante receta sin forma.
+Incluye las 11 maderas de Minecraft 1.21.1. La trampilla de hierro no se transforma en madera.
+Las recetas existentes de vallas siguen disponibles en Zombie Remains Loot.
+
+PESO
+Todos los pesos efectivos se dividen entre 3, incluida la munición, el arma y su munición cargada.
+Las tablas de configuración se conservan como pesos base: no se reescriben, por lo que reiniciar no divide el peso otra vez.
+Ejemplo con una bala de peso base 0,2 kg: 96 balas pesan 6,4 kg; dentro de una mochila pesan 0,64 kg.
+Capacidad inicial: 50 kg. Cada nivel de fuerza añade 2 kg; condición física añade 1,5 kg; sprint/resistencia añade 0,5 kg.
+Con nivel 10 en los tres, la capacidad base llega a 90 kg. Los modificadores externos del atributo se conservan.
+Las mochilas reconocidas reducen un 90% el peso de su contenido; la propia mochila conserva su peso, dividido entre 3 como todos los objetos.
+No se aplica esa reducción al resto del inventario, ni se pone un tope que esconda el peso real de una mochila llena.
+Se cuentan inventario, armadura, mano secundaria y equipo Curios. Sophisticated Backpacks usa su inventario real, también cuando la mochila está equipada.
+Se leen contenedores/bundles de Minecraft 1.21 y capacidades de inventario compatibles. Se evita contar dos veces el mismo almacenamiento de mochila.
+Los efectos por carga se calculan sobre la capacidad personal, no sobre antiguos límites absolutos: carga libre por debajo del 80%; molestias desde 80%, aumentando al exceder la capacidad.
+El cálculo de recogida tiene en cuenta el contenido del objeto recogido. Si el sistema original arroja exceso de carga, se recalcula el peso real tras cada extracción.
+Se elimina el bloqueo de salto basado en rangos absolutos viejos; sigue existiendo el bloqueo al exceder la capacidad personal.
+Los ajustes antiguos de porcentajes de mochila quedan sustituidos por el 90% solicitado. Los menús de edición de peso pueden mostrar el peso base; HUD y tooltips de peso efectivo usan el peso reducido.
+
+MUERTE Y AUDIO
+HAS MUERTO puede saltarse con clic/tecla tras 2 segundos desde que aparece el texto (2,85 s desde el comienzo de la pantalla).
+Fundido de 0,65 s para salir, seguido de entrada con fundido de 0,65 s en el creador.
+Se conserva el sonido inicial de muerte de la grabación adjunta, separado de la sección posterior de audio y de sus pausas largas; dura aproximadamente 4,66 s.
+La música del menú comienza al terminar ese sonido, incluso si ya se pasó al creador; el clic no corta el sonido de muerte.
+Las opciones del creador producen sonido al pulsarlas. Se conserva la música final al confirmar el personaje.
+
+VALIDACIÓN Y PRUEBA
+Compilado contra tus JAR de Minecraft, NeoForge, Survivor Creator y eZWeight.
+Pasaron 47 pruebas de balance y temporizadores, 38 comprobaciones de registro de eventos/empaquetado y la verificación de bytecode de 127 clases. También se revisaron las 11 recetas y el audio.
+No se ha ejecutado una partida completa en este entorno: las integraciones con tu conjunto de mods requieren prueba en Minecraft.
+Prueba: confirma un personaje nuevo y comprueba linterna/50 kg; cocina y retira comida/lingotes; fabrica objetos de madera; planta, labra y cosecha cultivos maduros.
+Usa /survivor skills para revisar la XP. Comprueba que el aviso desaparece y que las habilidades mantienen progreso al guardar y cargar.
+Compara el peso con 96 balas fuera/dentro de una mochila en inventario y en Curios. Confirma que solo cambia el peso de su contenido.
+Muere, espera dos segundos tras el texto, pulsa y comprueba ambos fundidos, la secuencia de sonido/música y el clic de las opciones.
+El registro también muestra un error independiente de biomas fabulous-furnished (spicewood_forest/maple_forest); estos parches no modifican esos biomas.
