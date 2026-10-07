@@ -1,6 +1,21 @@
-ZOMBOID HORDES 1.2.0 — NeoForge 1.21.1
+ZOMBOID HORDES 1.3.0 — NeoForge 1.21.1
 
-NOVEDADES 1.2.0 — IMPULSO, AVISOS Y PRUEBAS
+NOVEDADES 1.3.0 — COFRES Y SLABS
+2 slabs de madera del mismo tipo producen 1 tablón en crafting. Incluye los 11 tipos de madera de Minecraft 1.21.1 y el slab de mosaico de bambú, que devuelve tablón de bambú.
+Los cofres y barriles de loot generados tienen un 10% de probabilidad por noche de volver a preparar su botín, únicamente si están vacíos y cerrados. Los cofres dobles comprueban ambas mitades. No se borran ni reemplazan objetos; los cofres de almacenamiento colocados por el jugador sin tabla registrada no se rellenan.
+Se conserva la tabla de loot original en datos persistentes antes de que vanilla la borre al abrir el contenedor. La revisión nocturna queda guardada para evitar tiradas repetidas al reiniciar o retroceder el reloj. Solo se revisan chunks cargados; no se cargan terrenos para rellenar cofres. Cofres ya abiertos ANTES de instalar el addon y sin tabla original guardada no pueden recuperarse automáticamente.
+Probabilidad configurable: chestRestockChance en config/zomboid-hordes.json; 0 desactiva y 1 garantiza la tirada para cofres elegibles. La configuración actual se amplía una vez sin cambiar tus valores de hordas ya personalizados.
+
+COMANDOS DE DEPURACIÓN DE LOOT
+Requieren operador/trucos; mira un cofre o barril a menos de 6 bloques.
+/zhorda loot estado — muestra tabla original, loot pendiente, elegibilidad, última noche revisada y probabilidad.
+/zhorda loot probar — prepara loot al 100% para comprobarlo sin esperar la noche. Solo funciona vacío/cerrado y con tabla conocida y existente. Abre después el cofre. No modifica la probabilidad normal ni borra contenido. Informa si no conoce la tabla.
+Para comprobar desde cero: coloca un cofre vacío en un mundo de prueba, asígnale con /data merge block X Y Z {LootTable:"minecraft:chests/simple_dungeon"}, abre y vacía su loot; cierra, apunta y usa los comandos. Para comprobar la tirada natural usa una noche de un día posterior; el comando de prueba cuenta como revisado en el día actual.
+
+TABLAS MOSSLORN (OPCIONAL)
+mosslorn-loot-1.21.1-datapack.zip empaqueta tus nueve tablas de loot_table/chests en data/mosslorn/loot_table/chests, sin editar su botín. Incluye pack.mcmeta para 1.21.1. Instálalo en saves/<mundo>/datapacks (o <mundo>/datapacks en servidor) y usa /reload. Si ya tienes esas tablas instaladas y funcionando, no necesitas añadirlo. Solo sustituye esas tablas; no contiene las estructuras del overhaul. La regeneración funciona también con otras tablas de cofres vanilla/mods.
+
+FUNCIONES CONSERVADAS — IMPULSO, AVISOS Y PRUEBAS
 Al golpear cuerpo a cuerpo con impulso de carrera: +25% de daño. Corriendo y saltando: +50%. Hace falta desplazarse corriendo durante varios ticks; activar sprint estando quieto no da bonus. Se excluyen vehículos, agua, escalada y vuelo. El bonus se aplica al golpe, no a balas disparadas mientras corres. El impacto con impulso también aturde algo más.
 Todas las hordas del addon anuncian su inicio en el chat de los jugadores cercanos, incluido el helicóptero y las patrullas nocturnas. La actividad diurna tiene su aviso, sin música de horda.
 Todas las noches se programa una horda ligera de 8 por zona, +2 por jugador cercano, máximo 16. Llegan de 2 en 2 cada 6 segundos. Esta llamada nocturna solo moviliza un pequeño número de zombis existentes; no alerta toda la ciudad.
@@ -19,7 +34,7 @@ Los comandos fuerzan el inicio sin esperar la tirada diaria ni cambiar la hora d
 Conviene probar día, noche, ruido y helicóptero en ese orden, o en zonas distintas: los zombis de una prueba anterior siguen contando para los límites. Si una oleada queda pendiente, busca espacio con suelo válido o despeja los zombis cercanos; no se fuerzan apariciones dentro de paredes.
 
 COMBATE CONSERVADO — ADULTOS, HERIDAS Y MORDIDAS
-Quita cualquier addon Zomboid Hordes anterior y deja solo el 1.2.0. Se conserva la corrección de arranque de Mixin y los eventos de helicóptero/hordas.
+Quita cualquier addon Zomboid Hordes anterior y deja solo el 1.3.0. Se conserva la corrección de arranque de Mixin y los eventos de helicóptero/hordas.
 No aparecen zombis bebés. Los bebés guardados se convierten en adultos al cargarse, sin eliminarlos. Se aplica a Zombie y sus variantes heredadas.
 Los impactos efectivos producen heridas persistentes. Cabeza: +50% de daño cuerpo a cuerpo y 30% adicional de posibilidad de fallar una mordida por golpe, máximo 90%. Los mods de armas conservan su propio multiplicador de disparo a la cabeza, sin duplicarlo.
 Piernas: reducción progresiva de velocidad; brazos: reducción progresiva de fuerza. Cualquier pérdida de salud también debilita al zombi. Las reducciones tienen límite y no se acumulan cada tick ni le curan.
@@ -28,7 +43,7 @@ Para morder a un jugador necesita al menos 20 ticks (un segundo de juego) seguid
 La zona se estima con el rayo de apuntado del ataque y, cuando el proyectil permite leerlo, su trayectoria contra la hitbox. No es un modelo de huesos independiente ni cambia visualmente la mandíbula; los golpes indirectos sin punto identificable se consideran del torso.
 
 INSTALACIÓN
-Cierra Minecraft. Añade zomboid-hordes-1.2.0-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
+Cierra Minecraft. Añade zomboid-hordes-1.3.0-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
 Conserva los JAR originales que enviaste: SoundAttract 6.3.8d, Weaker Day Zombie 1.0.0, Horde Hoard 1.1.0, Zombie Awareness, ZombieChaos, Zombie Variants y Zombie Remains Loot 1.2.1. Sus dependencias habituales siguen siendo necesarias. Este addon requiere NeoForge 21.1.255 o posterior de la serie 21.1 y SoundAttract 6.3.8d.
 No reemplaza Zombie Remains Loot: los zombis de las oleadas siguen pasando por sus eventos normales de muerte y cadáveres.
 
@@ -58,11 +73,11 @@ No inicia eventos en Pacífico, con doMobSpawning=false, ni para jugadores creat
 El primer inicio crea config/zomboid-hordes.json. Ajusta probabilidad, tamaños, límites, espera y fuerza/velocidad allí; reinicia después. No sobrescribe tus configuraciones de otros mods.
 
 VALIDACIÓN
-Compilado para Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255. Pasaron 42 pruebas de probabilidad, calendario, cambio de fase, límites multijugador, alcance y validación de configuración; 15 comprobaciones de firmas contra los JAR originales; y verificación de estructura/pila del bytecode de las 19 clases. Recursos, mixins, metadatos y ambos OGG comprobados. Se comprobó la migración de configuración antigua y la conservación de personalizaciones posteriores. Las firmas de comandos se contrastaron con Brigadier. Los stubs de compilación no están incluidos en el mod.
-Además, pasaron 27 pruebas de heridas, zonas de impacto y preparación de mordida; las siete clases Mixin y ocho inyecciones tienen las retenciones esperadas por el cargador.
+Compilado para Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255. Pasaron 42 pruebas de probabilidad, calendario, cambio de fase, límites multijugador, alcance y validación de configuración; 19 comprobaciones de firmas contra los JAR originales; y verificación de estructura/pila del bytecode de las 21 clases. Recursos, mixins, metadatos y ambos OGG comprobados. Se comprobó la migración de configuración antigua y la conservación de personalizaciones posteriores. Las firmas de comandos se contrastaron con Brigadier. Los stubs de compilación no están incluidos en el mod.
+Además, pasaron 27 pruebas de heridas, zonas de impacto y preparación de mordida; las ocho clases Mixin y nueve inyecciones tienen las retenciones esperadas por el cargador.
 No se ha iniciado Minecraft en este entorno: las pruebas no sustituyen una comprobación de jugabilidad y rendimiento en tu pack.
 Para comprobar los eventos sin modificar la probabilidad, utiliza los comandos anteriores. Para comprobar la programación natural nocturna en un mundo de prueba, entra en una noche de un día nuevo; no se vuelve a tirar la misma noche al retroceder el reloj.
 Prueba sol directo, cambios de día/noche, disparos con/sin silenciador, correr cerca de grupos, y reiniciar tras una tirada. Si ocurre un cierre, el informe permitirá comprobar la integración concreta.
 
 FUENTES
-zomboid-hordes-1.2.0-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
+zomboid-hordes-1.3.0-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
