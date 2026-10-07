@@ -1,0 +1,49 @@
+ZOMBIE REMAINS LOOT 1.0.0 — Minecraft 1.21.1 / NeoForge 21.1.255
+
+INSTALACIÓN
+Cierra Minecraft, añade zombie-remains-loot-1.0.0-neoforge-1.21.1.jar a la carpeta mods de ZOMBIES POLDO y vuelve a iniciar.
+Conserva Doomsday Decoration, Self Expression, First Aid y los demás mods.
+No requiere KubeJS. En multijugador, instala el JAR en el servidor y los clientes.
+
+COMPORTAMIENTO
+Los zombis, husks, ahogados y aldeanos zombis dejan un Remains aleatorio al morir.
+También se incluyen variantes de mods que hereden de la clase Zombie, salvo piglins zombificados.
+Se necesita un espacio libre, seco y con suelo cerca de la muerte; si no existe, se conserva el botín normal del zombi.
+Clic derecho abre un inventario de 27 espacios. Se genera una sola vez, y se guarda con el mundo.
+El cadáver conserva el equipo que el zombi realmente habría soltado y añade botín aleatorio; reemplaza el resto de sus objetos sueltos habituales. Conserva la experiencia normal.
+Los Remains colocados manualmente o que ya existían antes de instalar el mod siguen siendo decoración.
+Al romper un cadáver en supervivencia, su contenido restante se destruye. No cae como bloque ni como cofre lleno. Da 1–2 unidades de carne: 85% podrida, 15% carne de vacuno cruda.
+En creativo, el inventario se elimina al destruir el cadáver y no se genera botín, siguiendo el comportamiento de creativo.
+
+BOTÍN PREDETERMINADO
+1–3 tiradas de útiles/comida/materiales; cantidades pequeñas.
+70% una prenda de Self Expression; 25% independiente de otra prenda.
+40% venda, apósito, férula, analgésico u otro suministro médico.
+5% independiente de un suministro médico raro.
+12% arma cuerpo a cuerpo de LesRaisins, Minecraft o Lookin' Sharp cuando es un TieredItem.
+2% arma TACZ con 4–12 cartuchos compatibles. Arma descargada; debes recargarla.
+En los cadáveres sin arma, 6% de munición sola: probabilidad global aproximada de 5,88%.
+Cada categoría es aleatoria; no todos los cadáveres contienen todos los tipos de objetos.
+Ropa y melees se generan con desgaste cuando el objeto admite durabilidad.
+Los IDs ausentes se omiten; no se sustituyen por objetos inventados.
+
+CONFIGURACIÓN
+El primer inicio crea config/zombie_remains_loot.json.
+Puedes cambiar probabilidades entre 0 y 1, listas de IDs, incluir variantes de zombis y el ID de la carne fresca.
+Para aplicar cambios, reinicia el juego/servidor. Los cadáveres existentes conservan su botín.
+El inventario se guarda en los datos de cada dimensión bajo zombie_remains_loot.dat.
+
+VALIDACIÓN Y LÍMITES
+Compilado con las clases de los archivos NeoForge 21.1.255 y Minecraft 1.21.1 suministrados.
+Comprobadas configuración, metadatos, bytecode y empaquetado; los auxiliares de compilación no se incluyen en el JAR.
+No se ha ejecutado una partida de Minecraft aquí: falta el entorno completo de juego y sus dependencias.
+El JAR TACZ adjunto supera el límite de transferencia de 32 MiB. La integración usa por reflexión la API pública de TACZ y sus índices de packs activos; su funcionamiento en ese hotfix concreto no está verificado.
+Si TACZ no expone esas APIs, el mod registra una advertencia y mantiene el resto del botín.
+
+PRUEBA EN TU MUNDO
+1. En una zona con suelo y espacio libre, mata varios zombis: debe aparecer un cadáver por muerte.
+2. Abre uno, retira un objeto, ciérralo y vuelve a abrir: no debe regenerar botín.
+3. Sal del mundo y vuelve a entrar: el inventario restante debe persistir.
+4. Deja objetos dentro y rompe el cadáver en supervivencia: deben perderse, y debe caer solamente carne.
+5. Para comprobar TACZ sin esperar al azar, cambia gunChance a 1 y ammoOnlyChance a 0 temporalmente, reinicia y mata otro zombi. Comprueba que el arma se puede recargar con su munición. Restaura gunChance a 0.02 al terminar.
+Si surge un error, comparte latest.log para revisar la compatibilidad concreta.
