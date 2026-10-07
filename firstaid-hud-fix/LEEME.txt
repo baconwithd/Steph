@@ -1,11 +1,12 @@
-FIRST AID ZOMBOID v3.4.2 — sonido y tela sucia
+FIRST AID ZOMBOID v3.4.3 — lesiones críticas menos letales
 
-Cierra Minecraft. Sustituye First Aid v3.4.1 por firstaid-1.21.1-ZOMBOID-v3.4.2-sound-cloth.jar y deja solo un JAR de First Aid en mods. En multijugador, instala el mismo JAR en servidor y clientes. Conserva LesRaisins tal como está.
+Cierra Minecraft. Reemplaza el First Aid anterior por firstaid-1.21.1-ZOMBOID-v3.4.3-critical-care.jar; deja solo un JAR First Aid. Usa el mismo archivo en servidor y clientes.
 
-El sonido de uso de medicamentos/curaciones de First Aid pasa de bucle a reproducción única. Se conserva la parada al cancelar, cambiar de objeto, morir o salir del mundo. Un efecto corto puede terminar antes de completar el tratamiento: ya no se repite para llenar su duración. Las animaciones y los sonidos propios de LesRaisins se conservan.
-La tela sucia usa una textura propia con manchas rojas; la tela limpia conserva la original. Se conserva la corrección del HUD v3.4.1.
+Cabeza y torso reciben el 50% del daño localizado anterior, incluyendo pérdida de salud por sangrado. Los cortes nuevos en esas partes pasan una tirada adicional del 20%; las mordidas del zombi cuyo mayor daño cae ahí también pasan esa tirada antes de procesar infección, protección de ropa y mensajes. El sangrado aleatorio derivado de golpes también pasa el filtro del 20% para esas partes. No son inmunes y heridas graves sin tratar aún pueden matar. Se conservan las heridas ya existentes y sus tratamientos.
+Los proyectiles conservan su localización real y su registro de herida de bala: el daño crítico se reduce sin convertir un disparo directo a la cabeza en un disparo a la pierna. Las extremidades conservan sus probabilidades originales. No cambia la probabilidad global de infección de una mordida que sí ocurre.
 
-VALIDACIÓN: ZIP íntegro, modelo JSON válido, textura PNG 32x32 transparente; estructura y pila del bytecode de 205 clases verificadas. Solo cambian el indicador de bucle del sonido, el modelo de tela sucia, la versión y una textura nueva. No se ha iniciado Minecraft en este entorno.
-Prueba consumir un medicamento y cancelar otro a mitad de uso; después cambia de objeto y comprueba que no persiste el sonido. Compara tela limpia y sucia en inventario.
+Se conservan el arreglo del HUD, los consumibles sin sonido en bucle y la textura roja de tela sucia de v3.4.2. Del JAR suministrado solo cambian DamageablePart, ClinicalHooks, Bleeding y la versión; se añade CriticalCare.class.
 
-FUENTES: FixConsumables.java y la textura están en firstaid-v3.4.2-sound-cloth-fuentes.zip. Incluye también el parche anterior del HUD y su prueba. Fuentes base v3.4: rama codex/firstaid-lr-installer, carpeta fuentes_firstaid_v34. Se conservan los avisos originales GPLv3/LGPLv2.1 del mod.
+VALIDACIÓN: 19 comprobaciones ejecutando el helper compilado contra fixtures de jugador/modelo: daño, umbrales de corte/mordida/sangrado y conservación de lesiones/tratamientos existentes. Estructura y pila de las 206 clases verificadas; ZIP íntegro; comparadas todas las entradas con la versión suministrada. No se inició Minecraft en este entorno.
+
+FUENTES: firstaid-v3.4.3-critical-care-fuentes.zip contiene CriticalCare.java, el parche ASM reproducible y fixtures de prueba. Incluye los parches anteriores disponibles. Fuentes base v3.4: rama codex/firstaid-lr-installer, carpeta fuentes_firstaid_v34 de baconwithd/Steph. Se conservan los avisos GPLv3/LGPLv2.1 originales.
