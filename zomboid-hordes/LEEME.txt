@@ -1,7 +1,10 @@
-ZOMBOID HORDES 1.0.0 — NeoForge 1.21.1
+ZOMBOID HORDES 1.0.1 — NeoForge 1.21.1
+
+CORRECCIÓN 1.0.1
+Corrige el cierre de arranque «SunProtectionMixin is missing an @Mixin annotation»: @Mixin debe estar en RuntimeInvisibleAnnotations (retención CLASS). Se corrigieron las cinco clases de integración y el stub utilizado para reconstruirlas. El comportamiento y los sonidos se conservan. Quita el addon 1.0.0 y deja solo el 1.0.1.
 
 INSTALACIÓN
-Cierra Minecraft. Añade zomboid-hordes-1.0.0-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
+Cierra Minecraft. Añade zomboid-hordes-1.0.1-neoforge-1.21.1.jar a mods. En multijugador, colócalo en servidor y clientes para cargar también los sonidos.
 Conserva los JAR originales que enviaste: SoundAttract 6.3.8d, Weaker Day Zombie 1.0.0, Horde Hoard 1.1.0, Zombie Awareness, ZombieChaos, Zombie Variants y Zombie Remains Loot 1.2.1. Sus dependencias habituales siguen siendo necesarias. Este addon requiere NeoForge 21.1.255 o posterior de la serie 21.1 y SoundAttract 6.3.8d.
 No reemplaza Zombie Remains Loot: los zombis de las oleadas siguen pasando por sus eventos normales de muerte y cadáveres.
 
@@ -32,9 +35,10 @@ El primer inicio crea config/zomboid-hordes.json. Ajusta probabilidad, tamaños,
 
 VALIDACIÓN
 Compilado para Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255. Pasaron 42 pruebas de probabilidad, calendario, cambio de fase, límites multijugador, alcance y validación de configuración; 13 comprobaciones de firmas contra los JAR originales; y verificación de estructura/pila del bytecode de las 14 clases. Recursos, mixins, metadatos y ambos OGG comprobados. Los stubs de compilación no están incluidos en el mod.
+Además, una prueba de regresión reproduce la falta de @Mixin en 1.0.0 y comprueba las cinco clases y seis inyecciones de 1.0.1. Se compararon las retenciones con los fuentes de SpongePowered/Mixin y las anotaciones de SoundAttract. Solo cambian cinco anotaciones y la versión del JAR.
 No se ha iniciado Minecraft en este entorno: las pruebas no sustituyen una comprobación de jugabilidad y rendimiento en tu pack.
 Para comprobar el evento rápidamente en un mundo de prueba, pon helicopterChance=1.0, reinicia y usa /time add 24000. Cambia a supervivencia; el evento llegará durante ese día. Después restaura 0.15.
 Prueba sol directo, cambios de día/noche, disparos con/sin silenciador, correr cerca de grupos, y reiniciar tras una tirada. Si ocurre un cierre, el informe permitirá comprobar la integración concreta.
 
 FUENTES
-zomboid-hordes-1.0.0-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
+zomboid-hordes-1.0.1-fuentes.zip contiene código, recursos, pruebas y stubs de compilación. No contiene código descompilado de tus mods. El código del addon se publica bajo GPL-3.0-only; los dos audios son los que proporcionaste y no reciben una licencia nueva por incluirse aquí.
