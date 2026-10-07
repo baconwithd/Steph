@@ -1,0 +1,19 @@
+FIRST AID ZOMBOID v3.4.1 — corrección del cierre del HUD
+
+Cierra Minecraft y reemplaza el First Aid instalado (el informe lo llama firstaid-1_3_3-ZOMBOID-HERIDAS-v3.1.jar, pero su versión interna es v3.4) por firstaid-1.21.1-ZOMBOID-v3.4.1-hud-fix.jar.
+Deja un único JAR de First Aid en mods. Conserva TACZ First Aid Compat, The Hordes, Survivor Creator, eZWeight y los demás mods. En multijugador, usa este reemplazo en servidor y clientes.
+
+El informe indica un NullPointerException en ClientEventHandler.getInteractionPromptDetail: quedaba un aviso HEAL_SELF cuando pendingHealingSelection ya era null.
+Ahora, borrar la selección de curación también borra ese aviso y reinicia su progreso/sonido. Los accesores del HUD comprueban la coherencia antes de dibujar.
+Los avisos de medicamentos, rescate, desfibrilador y ejecución se conservan aunque no exista selección de miembro, porque no dependen de ella.
+
+Se reconstruyó la v3.4 exacta con el JAR original cuyo SHA256 es e4f8038960b16c051a56e128ba47828ca2e061815016021709a9bd9b74109a95 y el payload del instalador de tu rama codex/firstaid-lr-installer. No se ejecutó el instalador remoto.
+De las 1226 entradas, solo cambia ClientEventHandler.class y la versión de neoforge.mods.toml. Se conservan heridas, telas, tratamientos, recetas, animaciones y compatibilidades de v3.4.
+
+VALIDACIÓN
+El escenario del informe reproduce el NPE antes del parche y deja de hacerlo después. Pasaron 24 comprobaciones de cancelación, selección válida, avisos sin selección y ausencia de avisos.
+Se verificó el bytecode de las 205 clases y la conservación del resto del JAR.
+No se ha iniciado Minecraft en este entorno. Prueba abrir Salud, seleccionar/tratar una parte y cancelar haciendo clic o cambiando el objeto de la mano; después prueba los avisos de rescate/medicamentos.
+
+FUENTES
+Las fuentes de esta corrección y su prueba están en firstaid-v3.4.1-hud-fix-fuentes.zip. Las fuentes de la base v3.4 están en fuentes_firstaid_v34 de codex/firstaid-lr-installer en baconwithd/Steph. La base First Aid usa GPLv3 y su API LGPLv2.1; se conservan sus metadatos y avisos originales.
