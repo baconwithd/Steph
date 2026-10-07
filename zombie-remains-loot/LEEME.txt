@@ -1,49 +1,73 @@
-ZOMBIE REMAINS LOOT 1.0.0 — Minecraft 1.21.1 / NeoForge 21.1.255
+ZOMBIE REMAINS LOOT 1.1.0 — Minecraft 1.21.1 / NeoForge 21.1.255
 
 INSTALACIÓN
-Cierra Minecraft, añade zombie-remains-loot-1.0.0-neoforge-1.21.1.jar a la carpeta mods de ZOMBIES POLDO y vuelve a iniciar.
-Conserva Doomsday Decoration, Self Expression, First Aid y los demás mods.
-No requiere KubeJS. En multijugador, instala el JAR en el servidor y los clientes.
+Cierra Minecraft. Elimina zombie-remains-loot-1.0.0-neoforge-1.21.1.jar de mods y coloca zombie-remains-loot-1.1.0-neoforge-1.21.1.jar.
+No instales ambas versiones a la vez. Conserva Doomsday Decoration y Corpse 1.21.1-1.1.13, junto con tus mods de botín.
+En multijugador, actualiza servidor y clientes. No requiere KubeJS.
 
-COMPORTAMIENTO
-Los zombis, husks, ahogados y aldeanos zombis dejan un Remains aleatorio al morir.
-También se incluyen variantes de mods que hereden de la clase Zombie, salvo piglins zombificados.
-Se necesita un espacio libre, seco y con suelo cerca de la muerte; si no existe, se conserva el botín normal del zombi.
-Clic derecho abre un inventario de 27 espacios. Se genera una sola vez, y se guarda con el mundo.
-El cadáver conserva el equipo que el zombi realmente habría soltado y añade botín aleatorio; reemplaza el resto de sus objetos sueltos habituales. Conserva la experiencia normal.
-Los Remains colocados manualmente o que ya existían antes de instalar el mod siguen siendo decoración.
-Al romper un cadáver en supervivencia, su contenido restante se destruye. No cae como bloque ni como cofre lleno. Da 1–2 unidades de carne: 85% podrida, 15% carne de vacuno cruda.
-En creativo, el inventario se elimina al destruir el cadáver y no se genera botín, siguiendo el comportamiento de creativo.
+POSES CORREGIDAS
+Suelo: familias Remains #2, #3, #5 y #9 (y sus variantes).
+Apoyados a una pared: familias #1, #4 y #8, orientadas con la espalda hacia una pared sólida de dos bloques de altura.
+Los colgados, empalados y otros modelos que requieren una estructura especial ya no se generan.
+Si el zombi no muere junto a una pared, se elige un cuerpo acostado. No se sobreescriben bloques sólidos.
+Los cadáveres registrados de 1.0.0 se corrigen al cargar su zona, conservando su inventario.
+Si desaparece la pared de un cuerpo sentado, se convierte en un cuerpo acostado.
+Los Remains colocados manualmente siguen siendo decoración.
 
-BOTÍN PREDETERMINADO
-1–3 tiradas de útiles/comida/materiales; cantidades pequeñas.
-70% una prenda de Self Expression; 25% independiente de otra prenda.
-40% venda, apósito, férula, analgésico u otro suministro médico.
-5% independiente de un suministro médico raro.
-12% arma cuerpo a cuerpo de LesRaisins, Minecraft o Lookin' Sharp cuando es un TieredItem.
-2% arma TACZ con 4–12 cartuchos compatibles. Arma descargada; debes recargarla.
-En los cadáveres sin arma, 6% de munición sola: probabilidad global aproximada de 5,88%.
-Cada categoría es aleatoria; no todos los cadáveres contienen todos los tipos de objetos.
-Ropa y melees se generan con desgaste cuando el objeto admite durabilidad.
-Los IDs ausentes se omiten; no se sustituyen por objetos inventados.
+INTERACCIÓN CON CADÁVERES DE ZOMBIS
+Clic derecho con mano vacía o un objeto que no sea una hoja: inventario de 27 espacios.
+Clic derecho con espada o cuchillo: despellejar. Cada corte da una unidad de carne; después de 3 cortes queda en huesos.
+La herramienta pierde 1 punto de durabilidad por corte. Hay un intervalo mínimo de medio segundo entre cortes.
+El cuerpo cambia entre variantes dañadas de la misma pose y finalmente se convierte en restos óseos.
+Clic izquierdo: destruye el cuerpo. En carne, suelta 1–2 unidades de carne. En huesos, suelta 2–4 huesos.
+También puedes recoger los huesos con clic derecho y cualquier objeto o con la mano vacía.
+AL DESTRUIR O RECOGER UN CUERPO DE ZOMBI, SU INVENTARIO RESTANTE SE PIERDE. No caen sus objetos ni un bloque de cadáver.
+La carne de zombi es 85% podrida y 15% carne de vacuno cruda, configurable como antes.
+
+DESCOMPOSICIÓN
+Los cadáveres de zombis pasan a huesos tras 20 minutos de tiempo de juego: 24000 ticks.
+Se usa el reloj del mundo; también envejecen mientras su zona está descargada y el mundo sigue funcionando. Con el mundo cerrado no pasa tiempo.
+El inventario, los cortes y la edad se guardan con el mundo. Abrir y cerrar no regenera botín.
+Para cadáveres antiguos de 1.0.0, los 20 minutos empiezan al cargar su zona con esta versión, porque la anterior no guardaba edad.
+Los cuerpos del mod Corpse conservan su tiempo de descomposición y desaparición configurado en ese mod.
+
+INTEGRACIÓN CON CORPSE
+Clic derecho con espada o cuchillo: 3 cortes de carne hasta convertirlo en esqueleto.
+Los cortes intermedios retiran la armadura mostrada; NO eliminan esos objetos del inventario.
+El progreso se conserva al guardar y cargar. El esqueleto final utiliza el modelo propio de Corpse.
+Clic derecho sin hoja sobre un cuerpo con carne sigue abriendo su inventario habitual.
+Clic izquierdo con cualquier objeto: destruye el cuerpo y suelta carne, o huesos si ya es esqueleto.
+Clic derecho con cualquier objeto sobre un esqueleto: recoge huesos y elimina el cuerpo.
+AL ELIMINAR UN CUERPO DE CORPSE, CAEN SUS OBJETOS, como al romper un cofre. Se usa la caída original del mod para evitar duplicarlos.
+Se respetan las opciones de acceso del propietario y acceso al esqueleto de Corpse.
+
+ESPADAS Y CUCHILLOS
+Se admiten objetos de la etiqueta minecraft:swords, SwordItem y IDs con sword, knife, cuchillo, dagger, karambit, machete, kukri, blade, cleaver o bayonet.
+También se lee el ID real de las armas de LesRaisins, aunque usen un objeto genérico.
+Si un mod usa otro nombre para su cuchillo, añade su ID a extraSkinningTools en la configuración.
+
+RECICLAJE DE VALLAS
+En la mesa de crafteo, una valla de madera de Minecraft da 2 tablones de su mismo tipo.
+Incluye roble, abeto, abedul, jungla, acacia, roble oscuro, manglar, cerezo, bambú, carmesí y distorsionado.
+La valla de ladrillos del Nether, que no es de madera, devuelve 2 bloques de ladrillos del Nether.
+No incluye puertas de valla ni vallas añadidas por otros mods.
 
 CONFIGURACIÓN
-El primer inicio crea config/zombie_remains_loot.json.
-Puedes cambiar probabilidades entre 0 y 1, listas de IDs, incluir variantes de zombis y el ID de la carne fresca.
-Para aplicar cambios, reinicia el juego/servidor. Los cadáveres existentes conservan su botín.
-El inventario se guarda en los datos de cada dimensión bajo zombie_remains_loot.dat.
+config/zombie_remains_loot.json mantiene las probabilidades y listas de botín de 1.0.0.
+Se añaden zombieDecayTicks=24000, skinningCuts=3 y extraSkinningTools=[] a las configuraciones antiguas.
+Reinicia para aplicar cambios. Los cadáveres existentes conservan su inventario; no se regenera.
+El botín sigue incluyendo útiles, ropa de Self Expression, First Aid, melees y armas/munición TACZ raras.
 
-VALIDACIÓN Y LÍMITES
-Compilado con las clases de los archivos NeoForge 21.1.255 y Minecraft 1.21.1 suministrados.
-Comprobadas configuración, metadatos, bytecode y empaquetado; los auxiliares de compilación no se incluyen en el JAR.
-No se ha ejecutado una partida de Minecraft aquí: falta el entorno completo de juego y sus dependencias.
-El JAR TACZ adjunto supera el límite de transferencia de 32 MiB. La integración usa por reflexión la API pública de TACZ y sus índices de packs activos; su funcionamiento en ese hotfix concreto no está verificado.
-Si TACZ no expone esas APIs, el mod registra una advertencia y mantiene el resto del botín.
+VALIDACIÓN
+Compilado contra tus archivos de Minecraft 1.21.1 y NeoForge 21.1.255.
+Verificadas las firmas utilizadas de Corpse 1.21.1-1.1.13 por inspección de su JAR.
+Pasaron 16 comprobaciones de configuración y 59 de poses, edad y herramientas; las 12 recetas, assets y el bytecode se revisaron.
+No se ha ejecutado una partida completa de Minecraft en este entorno. La integración con tu hotfix de TACZ sigue pendiente de prueba dentro del juego.
 
-PRUEBA EN TU MUNDO
-1. En una zona con suelo y espacio libre, mata varios zombis: debe aparecer un cadáver por muerte.
-2. Abre uno, retira un objeto, ciérralo y vuelve a abrir: no debe regenerar botín.
-3. Sal del mundo y vuelve a entrar: el inventario restante debe persistir.
-4. Deja objetos dentro y rompe el cadáver en supervivencia: deben perderse, y debe caer solamente carne.
-5. Para comprobar TACZ sin esperar al azar, cambia gunChance a 1 y ammoOnlyChance a 0 temporalmente, reinicia y mata otro zombi. Comprueba que el arma se puede recargar con su munición. Restaura gunChance a 0.02 al terminar.
-Si surge un error, comparte latest.log para revisar la compatibilidad concreta.
+PRUEBA RÁPIDA
+Mata zombis en un área abierta y al lado de una pared alta: los modelos de apoyo solo deben aparecer con pared.
+Despelleja un cuerpo con clic derecho: tras 3 cortes deben quedar huesos y no debe producir más carne.
+Recoge los huesos de un cuerpo zombi con objetos dentro: sus objetos deben perderse.
+Repite con un cuerpo de Corpse con objetos dentro: al eliminarlo deben caer sus objetos una sola vez.
+Deja un cuerpo zombi sin despellejar y juega 20 minutos: debe convertirse en huesos. Para una prueba corta, cambia temporalmente zombieDecayTicks a 100 (5 segundos), reinicia y crea un cuerpo nuevo.
+Pon una valla en la mesa: debe producir 2 tablones del mismo tipo.
