@@ -1,9 +1,33 @@
-ZOMBIE REMAINS LOOT 1.1.0 — Minecraft 1.21.1 / NeoForge 21.1.255
+ZOMBIE REMAINS LOOT 1.2.0 — Minecraft 1.21.1 / NeoForge 21.1.255
 
 INSTALACIÓN
-Cierra Minecraft. Elimina zombie-remains-loot-1.0.0-neoforge-1.21.1.jar de mods y coloca zombie-remains-loot-1.1.0-neoforge-1.21.1.jar.
-No instales ambas versiones a la vez. Conserva Doomsday Decoration y Corpse 1.21.1-1.1.13, junto con tus mods de botín.
+Cierra Minecraft. Elimina las versiones 1.0.0/1.1.0 de Zombie Remains Loot y coloca zombie-remains-loot-1.2.0-neoforge-1.21.1.jar.
+No instales ambas versiones a la vez. Conserva Doomsday Decoration y Corpse 1.21.1-1.1.13, junto con tus mods de botín. Conserva TACZ Bandits 1.3, TACZ y FracturePoint originales.
 En multijugador, actualiza servidor y clientes. No requiere KubeJS.
+
+BANDIDOS — DIFICULTAD MEDIA
+Grupos de 1–3; el límite local es 3 por jugador cercano (hasta 6 con dos jugadores juntos).
+Intento de aparición cada 30 segundos con 25% de probabilidad, solo en el Overworld y fuera de Pacífico.
+Se buscan zonas cargadas, seguras y fuera de la mirada del jugador, entre 32 y 64 bloques.
+Las apariciones naturales originales se sustituyen por este control; huevos y comandos siguen disponibles.
+Patrullan juntos, comparten la última posición vista y pueden flanquear. Pierden el rastro después de 20 segundos sin verte.
+Agachado te detectan a menor distancia (8 bloques); caminando 20; corriendo 32. Las paredes cortan la visión.
+También combaten zombis, que pueden atacarlos. Al recibir daño buscan cobertura alcanzable y alternan ocultarse y asomarse.
+La cobertura depende de los obstáculos y caminos disponibles en el terreno.
+Contra jugadores disparan más despacio y fallan más al moverte; quedarte quieto aumenta su precisión y daño.
+Tienen munición limitada y pausas de recarga: se elimina la reposición infinita del comportamiento original.
+
+PROGRESIÓN Y BOTÍN
+Se recuerda el mejor equipo observado en cada jugador cercano, aunque luego lo guarde.
+Empiezan con pistolas; después progresan hacia subfusiles/escopetas, fusiles y armas superiores, con mejor protección.
+Los bandidos ya existentes mejoran gradualmente fuera de combate. No se equipan lanzacohetes.
+Dejan cuerpos de Doomsday con su arma real descargada, munición compatible y armadura.
+Munición recuperable por nivel: 1–3, 2–5, 3–8 o 4–10 cartuchos.
+Añaden útiles y curas, con materiales de FracturePoint más frecuentes: 80% en bandidos frente a 3% en zombis.
+Los objetos se distribuyen en huecos aleatorios de los cadáveres, incluidos los inventarios principales de Corpse.
+El desorden se guarda; abrir de nuevo no vuelve a generar ni cambiar el botín.
+Los cadáveres de bandidos usan el mismo despellejado, huesos tras 20 minutos y pérdida de contenido al destruirlos que los de zombis.
+Se requiere espacio libre, seco y con suelo cerca de la muerte para colocar un cadáver.
 
 POSES CORREGIDAS
 Suelo: familias Remains #2, #3, #5 y #9 (y sus variantes).
@@ -55,13 +79,14 @@ No incluye puertas de valla ni vallas añadidas por otros mods.
 CONFIGURACIÓN
 config/zombie_remains_loot.json mantiene las probabilidades y listas de botín de 1.0.0.
 Se añaden zombieDecayTicks=24000, skinningCuts=3 y extraSkinningTools=[] a las configuraciones antiguas.
+La sección bandits añade los ajustes de grupos, sigilo, dificultad y botín FracturePoint. softMode=false selecciona media; true selecciona suave.
 Reinicia para aplicar cambios. Los cadáveres existentes conservan su inventario; no se regenera.
 El botín sigue incluyendo útiles, ropa de Self Expression, First Aid, melees y armas/munición TACZ raras.
 
 VALIDACIÓN
 Compilado contra tus archivos de Minecraft 1.21.1 y NeoForge 21.1.255.
 Verificadas las firmas utilizadas de Corpse 1.21.1-1.1.13 por inspección de su JAR.
-Pasaron 16 comprobaciones de configuración y 59 de poses, edad y herramientas; las 12 recetas, assets y el bytecode se revisaron.
+Pasaron 16 comprobaciones de configuración, 59 de poses/edad/herramientas y 34 de equilibrio/progresión/sigilo; las 12 recetas, assets y el bytecode se revisaron.
 No se ha ejecutado una partida completa de Minecraft en este entorno. La integración con tu hotfix de TACZ sigue pendiente de prueba dentro del juego.
 
 PRUEBA RÁPIDA
@@ -71,3 +96,10 @@ Recoge los huesos de un cuerpo zombi con objetos dentro: sus objetos deben perde
 Repite con un cuerpo de Corpse con objetos dentro: al eliminarlo deben caer sus objetos una sola vez.
 Deja un cuerpo zombi sin despellejar y juega 20 minutos: debe convertirse en huesos. Para una prueba corta, cambia temporalmente zombieDecayTicks a 100 (5 segundos), reinicia y crea un cuerpo nuevo.
 Pon una valla en la mesa: debe producir 2 tablones del mismo tipo.
+
+PRUEBA DE BANDIDOS
+Con un jugador nuevo, comprueba que los primeros bandidos usan pistolas y dejan poca munición compatible.
+Compara correr lateralmente con permanecer quieto, acercarte agachado y ocultarte tras una pared.
+Dispara a un grupo junto a obstáculos: comprueba cobertura, coordinación y combate contra zombis.
+Obtén equipo superior y espera: los nuevos grupos deben mejorar; guarda y vuelve a entrar para comprobar la progresión persistente.
+Abre y vuelve a abrir cadáveres de bandidos: objetos dispersos, sin regeneración; destrúyelos para comprobar la pérdida del contenido.
