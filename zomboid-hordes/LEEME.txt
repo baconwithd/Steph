@@ -1,6 +1,6 @@
-ZOMBOID HORDES 1.4.1 — más zombis, velocidad y alcance
+ZOMBOID HORDES 1.4.2 — más zombis, velocidad y alcance
 
-Reemplaza el addon Zomboid Hordes anterior por zomboid-hordes-1.4.1-neoforge-1.21.1.jar. Conserva SoundAttract 6.3.8d y los demás mods del pack. Instala la misma versión en servidor/clientes. Usa también Zombie Remains Loot 1.3.0 para la calidad nueva del botín.
+Reemplaza el addon Zomboid Hordes anterior por zomboid-hordes-1.4.2-neoforge-1.21.1.jar. Conserva SoundAttract 6.3.8d y los demás mods del pack. Instala la misma versión en servidor/clientes. Usa también Zombie Remains Loot 1.3.0 para la calidad nueva del botín.
 
 CORRECCIÓN 1.4.1 — CRASH DE COFRES
 El informe crash-2026-10-07_18.33.53-server.txt identifica ConcurrentModificationException en LootRestock.tick al avanzar un iterador de cofres. Se sustituye el iterador persistente del índice mutable por lotes estables separados del índice. Si durante la revisión se añaden o descargan cofres/chunks, el lote sigue siendo válido; se omiten posiciones retiradas y las nuevas se procesan en el siguiente ciclo. La descarga de chunks modifica el índice en el hilo del servidor. Se conserva el máximo de 128 candidatos por revisión, las tiradas nocturnas guardadas y las comprobaciones de inventario vacío/cerrado. No limpia contenido ni cambia el loot.
@@ -9,7 +9,7 @@ Sustituye solamente Zomboid Hordes 1.4.0. Conserva Zombie Remains Loot 1.4.1 y l
 
 
 BALANCE NUEVO
-Horda cada noche: 80 zombis por zona; +25 por jugador cercano, máximo 180. Llegan hasta 16 cada 2 segundos. Patrullas: 60% de posibilidad de 12 cada 90 segundos. Ruido: hasta 100, hasta 20 cada 2 segundos. Helicóptero: 15% diario, presupuesto 480 para un jugador, +120 por jugador cercano, máximo 800. Los grupos diurnos son de 8 por zona cada minuto, hasta 60 zombis normales cercanos. Los zombis de día también son más rápidos: +25% sobre su velocidad base, frente a +40% de noche. La noche conserva su aumento de daño.
+Horda cada noche: 80 zombis por zona; +25 por jugador cercano, máximo 180. Llegan hasta 16 cada 2 segundos. Patrullas: 60% de posibilidad de 12 cada 90 segundos. Ruido: hasta 100, hasta 20 cada 2 segundos. Helicóptero: 15% diario, presupuesto 480 para un jugador, +120 por jugador cercano, máximo 800. Los grupos diurnos son de 8 por zona cada minuto, hasta 60 zombis normales cercanos. Los zombis de día también son más rápidos: +10% sobre su velocidad base, frente a +20% de noche. La noche conserva su aumento de daño.
 Límites generales: 300 cercanos y 600 del evento activos por nivel. Presupuestos no garantizan todos los zombis simultáneamente: oleadas esperan terreno/chunks válidos y se detienen al alcanzar los límites. Se realizan hasta 120 intentos de ubicación por revisión. No se cargan chunks para forzar apariciones ni se generan dentro de paredes. Las oleadas expiran tras 8 minutos.
 La configuración existente se migra una vez al balance nuevo (balanceVersion=4), conservando probabilidad del helicóptero, regeneración de cofres y otros valores no relacionados. Puedes personalizar después; no se sobrescribe al siguiente inicio.
 
@@ -28,4 +28,6 @@ COFRES Y RECETAS CONSERVADOS
 
 VALIDACIÓN
 Compilación Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255; 42 comprobaciones de calendario/ruido/límites, migración de configuración y preservación de personalizaciones, 20 firmas de integración originales, retención de 9 mixins/10 inyecciones y verificación de pila/estructura de las 23 clases. Comprobados +2 de alcance, ausencia del temporizador de contacto y eliminación del cooldown solo en zombis. No se inició Minecraft en este entorno; prueba jugabilidad/rendimiento en tu pack con los comandos.
-Fuentes y recursos del addon: zomboid-hordes-1.4.1-fuentes.zip. GPL-3.0-only para el código; los audios conservan su origen suministrado por el usuario.
+Fuentes y recursos del addon: zomboid-hordes-1.4.2-fuentes.zip. GPL-3.0-only para el código; los audios conservan su origen suministrado por el usuario.
+
+NOVEDAD 1.4.2: velocidad de zombis ligeramente reducida. daySpeed=0.10 y nightSpeed=0.20. La configuración existente se migra una vez al balanceVersion=5 cambiando solo estas dos velocidades cuando ya tenía balanceVersion=4. Se conservan número de zombis, loot y arreglo del crash de cofres. Las personalizaciones posteriores se respetan al reiniciar.
