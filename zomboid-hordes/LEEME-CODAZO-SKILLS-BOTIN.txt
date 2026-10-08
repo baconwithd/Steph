@@ -1,0 +1,55 @@
+CODAZO, HABILIDADES Y BOTÍN — NeoForge 1.21.1
+
+INSTALACIÓN
+Reemplaza, sin dejar duplicados, los tres mods anteriores por:
+- survivorcreator-neoforge-1.21.1-1.0.9-zomboid-v14-combat-skills.jar
+- zombie-remains-loot-1.6.0-neoforge-1.21.1.jar
+- zomboid-global-melee-animations-2.3.0-elbow-range.jar
+Usa las mismas versiones en clientes y servidor.
+Conserva eZWeight-neoforge-1.21.1-1.8.4-stamina-v9-combat.jar: es una dependencia obligatoria del mod de melee. Mantén TaCZ r7, LesRaisins Tactical safe y el resto del pack. No instales simultáneamente otras versiones de estos mods. Haz una copia de tu mundo antes de actualizar.
+
+GOLPE CON V
+Alcance máximo: 1,5 bloques, medido hasta la superficie del objetivo, con línea de visión. Daño base: 2 puntos (1 corazón), antes de defensas y modificaciones de otros mods. Espera: 15 ticks / 0,75 segundos a 20 TPS. Entorpecimiento del zombi: 15 ticks. Empuje reducido; coste de estamina: 45. Se mantienen los costes de ataque normal (60) y pesado (120), la espera normal reducida un 25% y el daño pesado aumentado un 50%.
+Las armas TaCZ usan su animación bayonet_stock. Las melees conocidas usan el clip melee_stock de las armas largas. Para mano vacía y objetos desconocidos se renderizan los brazos mediante el renderizador nativo de melee, usando ese mismo clip; se elimina la rotación anterior del brazo vanilla. El golpe V no recibe bonos de las categorías melee ni genera XP de ellas.
+
+HABILIDADES ACTIVAS (18; MÁXIMO NIVEL 10)
+Se conserva la experiencia anterior y la cola de avisos: si suben varias habilidades, los mensajes aparecen por turnos, separados 4,5 segundos. No se gana XP durante los 10 segundos de gracia ni con los nuevos eventos en creativo/espectador.
+
+NUEVAS — práctica y beneficio por nivel:
+- Puntería: disparar proyectiles TaCZ y acertar a criaturas/jugadores; dispersión -4% por nivel, máximo -40%. No cambia la dirección de apuntado ni garantiza aciertos.
+- Recarga: terminar una recarga real que añada balas al cargador; tiempo -3% por nivel, máximo -30%. Una recarga cancelada no da XP ni crea munición.
+- Hachas, hojas largas, hojas cortas, contundentes largos, contundentes cortos y lanzas: acertar golpes que hagan daño con la familia correspondiente; daño +4% y probabilidad adicional de crítico +1,5 puntos porcentuales por nivel. Máximos: +40% daño y +15 puntos porcentuales. El crítico adicional multiplica por 1,5.
+- Mantenimiento: acertar con una melee que tenga durabilidad; cada nivel aporta un 4% de probabilidad de evitar cada punto de desgaste, máximo 40%. Se conserva el efecto de Irrompibilidad.
+La clasificación reconoce espadas/hachas vanilla y nombres como knife, dagger, katana, machete, bat, crowbar, hammer, pipe, spear y trident. Un ítem modificado con un identificador distinto puede necesitar ampliar la clasificación.
+XP base de combate antes del ajuste lento existente: disparo 0,3 (sin multiplicar por perdigones del mismo tick), impacto de bala 1, recarga válida 2, impacto melee 1, mantenimiento 0,6. Después se aplica la reducción de progreso y el nivel actual; no son niveles completos por acción.
+
+CONSERVADAS — práctica y beneficio por nivel:
+- Fitness: correr por el suelo y saltar; +0,4 armadura, +1 punto de vida máxima, +1,5 kg de carga.
+- Fuerza: acertar golpes con armas reconocidas; +0,8 daño melee, +1 punto de vida máxima, +2 kg de carga.
+- Carrera: correr por el suelo fuera del agua; +0,5 kg de carga.
+- Carpintería: talar y fabricar madera compatible; +3% velocidad al romper troncos/tablones.
+- Metalurgia: fabricar metal y retirar metales/vidrio/ladrillos del horno; +3% velocidad en bloques minables con pico.
+- Cocina: fabricar comida y retirarla del horno; +0,1 saturación adicional al comer.
+- Agricultura: cosechar cultivos maduros compatibles, plantar y arar; +2 puntos porcentuales de posibilidad de alimento extra.
+- Primeros auxilios: fabricar material médico, aplicar tratamientos válidos y extraer balas con First Aid; tiempo -4%, curación por pulso +5%.
+- Pesca: recoger una captura; espera -4%, suerte +0,2 y probabilidad de pez extra +5 puntos porcentuales.
+Se conservan los umbrales acumulados: 30, 80, 160, 280, 450, 700, 1000, 1400, 1900 y 2500 XP. El ritmo de XP baja con el nivel. Fitness y Fuerza juntas a nivel 10 aportan 20 puntos extra de vida; subir nivel no cura automáticamente heridas.
+El menú mantiene las diez casillas de Project Zomboid y añade los grupos de armas de fuego y melee. First Aid 3.4.5 conserva su menú corporal compatible. Consulta /survivor skills.
+
+ARMAS, RAREZA Y MUNICIÓN
+La referencia se obtiene dinámicamente de la pistola cargada con menor daño base por disparo en TaCZ. Se usa el daño de sus datos, antes de armadura, headshots y accesorios, no una lista fija de nombres.
+Común: hasta 1,01 veces el daño de referencia; poco común: hasta 1,5; rara: hasta 2,2; épica: hasta 3,5; legendaria: por encima. La pistola más débil tiene preferencia entre las armas comunes. Dentro de cada categoría también se reduce la frecuencia de las armas más dañinas.
+Los cadáveres de mejor calidad favorecen categorías superiores; no garantizan siempre un arma. El arma real del bandido se conserva en su botín, separada de su munición infinita de combate.
+Cada arma conservada por el sistema de botín recibe munición suelta compatible. Se comprueban todos los calibres presentes, no solo el primero. Cantidad orientativa por calibre según calidad: 15–32, 24–48, 36–64, 48–96 o 64–128. Si hay varias armas del mismo calibre, se asegura al menos 15 balas por arma; pueden superar esas cantidades en contenedores con muchas armas. La munición se divide en stacks compatibles.
+Se aplica a cadáveres, tablas de loot vanilla/mods y drops de criaturas; no se alteran las pertenencias del jugador al morir. Los scripts que crean ítems directamente sin usar esos eventos/tablas quedan fuera. En un contenedor lleno, el sistema reserva espacio para munición sustituyendo otros objetos; una arma que no pueda conservar munición compatible no se deja como botín.
+El arma muestra categoría y daño base en su descripción. Se conservan rarezas del cuerpo, minerales, ropa, mochilas, mutantes, bandidos y descomposición anterior.
+
+VERIFICACIÓN Y LÍMITES
+Compilado con Java 21 contra Minecraft 1.21.1, NeoForge 21.1.255 y los JAR disponibles del pack. Pasan 484 comprobaciones de reglas, 28 de enlaces/firmas reales, 18 de animación con APIs simuladas y 14 de munición/botín con APIs simuladas; estructura de bytecode y archivos comprobados.
+No se ha ejecutado Minecraft aquí. El TaCZ r7 adjunto supera el límite de descarga de archivos de este entorno; sus hooks opcionales se han implementado a partir de las APIs públicas y necesitan comprobarse con tu versión exacta. Las pruebas simuladas no sustituyen una prueba visual de los brazos ni una recarga real dentro del pack.
+Prueba V con manos vacías, un objeto cualquiera, una espada y un rifle; comprueba alcance, cooldown, entorpecimiento y ausencia del giro anterior. Después prueba XP de disparo/recarga y dos armas de calibres distintos en un cadáver.
+
+FUENTES
+El ZIP incluye los cambios de estos tres mods, pruebas, stubs de compilación, build.py y PatchProxyRenderer.java. No incluye JARs de terceros ni modifica eZWeight. Reconstrucción con Java 21/Python 3 y las dependencias originales:
+python build.py --minecraft <client-srg.jar> --neoforge <universal.jar> --lrtactical <LesRaisins-safe.jar> --survivor <v13.jar> --loot <1.5.0.jar> --melee <2.0.0.jar> --weight <eZWeight-v9.jar> --libs <carpeta-librerias> --out-dir <salida>
+La carpeta de librerías debe contener ecj.jar, ASM 9.7.1 (core/tree/util/analysis), Gson, Guava, JOML, SLF4J y annotations usados por el pack. Los stubs sirven solo para compilación y no se incluyen en los mods.
