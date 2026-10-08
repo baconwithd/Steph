@@ -1,31 +1,45 @@
-ZOMBOID HORDES 1.6.0 — helicóptero moderado y zombis individuales
+ZOMBOID HORDES 1.7.0 — sigilo y percepción por ruido estilo PZ
 
 INSTALACIÓN
-Reemplaza solo Zomboid Hordes 1.5.0 por zomboid-hordes-1.6.0-neoforge-1.21.1.jar. Deja un solo JAR de este addon. Instala la misma versión en servidor y clientes. Conserva SoundAttract 6.3.8d, Survivor Creator v13, First Aid 3.4.5, Zombie Remains Loot 1.4.1 y eZWeight v7.
+Conserva tu soundattract-6.3.8d.jar y sustituye SOLO el addon Zomboid Hordes anterior por zomboid-hordes-1.7.0-neoforge-1.21.1.jar. Instala la misma versión en clientes y servidor; deja un solo JAR de este addon. Mantén Survivor Creator v13, First Aid 3.4.5, Zombie Remains Loot 1.4.1 y eZWeight v7.
+El cambio está en el addon porque integra SoundAttract con la IA y las hordas del pack. El SoundAttract recién adjuntado se comprobó idéntico al que usamos previamente.
 
-HELICÓPTERO
-Probabilidad diaria conservada: 15%. Presupuesto nuevo: 90 zombis para un jugador, +20 por jugador cercano adicional, máximo 150. Antes era 480/+120/máximo 800.
-Primero llegan hasta 18, en grupos de hasta 4 cada 5 segundos. Después cada muerte de un zombi generado por esa horda permite UN refuerzo, hasta agotar el presupuesto. No recibe créditos por descargar chunks, huir, desapariciones o matar zombis ajenos al evento.
-Se limita la zona de aparición a 24 zombis vivos cercanos, incluyendo los naturales y otras hordas. En multijugador se suman 4 iniciales y 6 al límite por jugador cercano adicional: máximos de 30 iniciales y 42 cercanos. Los refuerzos pendientes esperan si se alcanza ese límite. No se eliminan zombis naturales ni se recortan entidades ya aparecidas.
-El evento conserva su límite de 8 minutos; el presupuesto no garantiza que todos aparezcan. Usa terrenos/chunks cargados a 48–80 bloques, mínimo 40 de jugadores. Tickets, créditos y vínculo con cada zombi se guardan con el mundo. Las oleadas antiguas pendientes se ajustan al nuevo presupuesto cuando se procesan.
+PERFILES
+75% torpes, 15% normales y 10% atentos. Los perfiles se guardan con cada entidad. Los perfiles de 1.6.0 se actualizan una sola vez al nuevo reparto; después no se sortean de nuevo al cargar.
+Se aplica a zombis vanilla, subclases, entidades de Zombie Variants, los siete mutantes reconocidos de MutantsZombies y otros mobs registrados con zombie en su identificador. No convierte bandidos ni animales en zombis.
+Los torpes miran hacia abajo cuando no persiguen ni investigan. Se retira su tarea vanilla de mirar al jugador para que no te sigan con la mirada antes de detectarte. Conservan deambulación y pausas individuales.
+Los atentos suman +25% de vida máxima y +15% de daño sobre su base; se combinan con los ajustes día/noche y las mejoras propias de los mutantes. Los modificadores se guardan por identificador y no se acumulan al recargar. No cura heridas existentes al asignar más vida máxima.
 
-ZOMBIS INDIVIDUALES
-Cada zombi conserva un perfil al guardar/cargar: 35% distraídos, 45% normales y 20% atentos. Varía el oído y la reacción. Un 12% adicional tiene oído muy reducido, combinado con cualquier perfil.
-Distancia visual base: 14/24/36 bloques; agacharte la reduce al 45%. Necesitan línea de visión para identificarte normalmente; a menos de 4 bloques reaccionan al verte. Los distraídos tardan aproximadamente 1–3 segundos, los normales 0,3–1,2 y los atentos hasta 0,3 segundos, además del intervalo de revisión de la IA.
-La investigación de sonidos considera distancia, oído individual y probabilidad de atención. Recuerdan un punto aproximado del ruido, con mayor error los distraídos. Algunos no reaccionan; otros llegan tarde. Al perder de vista al jugador conservan una memoria breve, en lugar de conocer siempre su posición. Si los atacas, reaccionan contra quien les hizo daño durante unos 10 segundos.
-Los que no tienen objetivo ni un ruido que investigar pueden detenerse brevemente y continuar deambulando. Se mantienen navegación y combates normales. La integración de SoundAttract retira solo AttractionGoal, LeaderAttractionGoal, FollowLeaderGoal y FollowerEdgeRelayGoal de los zombis, sustituyendo la atracción uniforme por el oído individual y evitando grupos coordinados por líderes. Se conservan otros comportamientos del pack, como olores, trepar y romper obstáculos; otros mods pueden seguir influyendo en la navegación.
-Se elimina la fijación automática del helicóptero a jugadores hasta 192 bloques: el helicóptero atrae por ruido, no les revela al jugador a través de paredes.
+SIGILO
+Alcance visual por perfil, jugador de pie: torpe 8, normal 14, atento 24 bloques. Agachado: 1,5 / 3,5 / 10 bloques. Necesitan línea de visión y que estés dentro de su campo visual. Los torpes tienen un campo frontal estrecho, aún más estrecho frente a un jugador agachado.
+A 5 bloques, un jugador agachado queda fuera del alcance de los perfiles torpe/normal, que suman 90% del reparto. Esto es el resultado de las reglas, no una medición de jugabilidad dentro del pack. Los atentos todavía pueden detectarlo si lo ven.
+A menos de 1,25 bloques pueden reconocerte inmediatamente si te ven. Si ya te habían identificado, siguen una memoria breve de unos 8 segundos; agacharte no borra instantáneamente una persecución. Si les haces daño, reaccionan contra quien les golpeó durante unos 10 segundos.
+Demora de reconocimiento: torpes 1,5–3,5 s, normales 0,5–1,5 s y atentos hasta 0,4 s, más el intervalo de revisión de la IA. Los perfiles poseen además diferencias de oído y posibilidad de atender un ruido. Un 12% adicional tiene oído muy reducido.
 
-CONFIGURACIÓN
-config/zomboid-hordes.json se migra una vez a balanceVersion=7. Desde v6 solo cambia los valores del helicóptero; conserva las noches, velocidad diurna/nocturna, probabilidad diaria, rareza del ruido y regeneración de cofres. Las personalizaciones hechas después de migrar no se sobrescriben en el siguiente inicio.
-Nuevas opciones: helicopterInitial=18, helicopterActiveLimit=24, helicopterWaveSize=4, helicopterWaveIntervalTicks=100. Se conservan la gracia y las skills de Survivor Creator y las recetas anteriores.
+RUIDO
+El límite de 8 bloques corresponde a ruidos cotidianos. Disparos, explosiones y helicóptero tienen más alcance.
+- Caminar: base 4 bloques. Correr: base 8. Caminar agachado no genera el aviso adicional de pasos del addon; si SoundAttract registra un paso/agitación, su base se limita a 1 bloque.
+- Colocar/romper bloques: base 4 bloques; agachado, 2. Tiene poco peso para atraer hordas. Se cuentan eventos reales del servidor.
+- Puertas, cofres y otros ruidos cotidianos registrados: base máxima 8 bloques.
+- Armas: se conserva la distancia del arma/silenciador, con un máximo de investigación de 192 bloques. Explosiones: base de 32–144, según el registro de sonido, con máximo final de 192 por oído individual.
+El oído individual reduce el alcance de los torpes y amplía el de los atentos; para sonidos cotidianos nunca supera 8. Escuchar no implica detectar al jugador: investigan una posición aproximada. Los torpes buscan con más error. Un ruido muy fuerte puede interrumpir el intervalo de atención de un ruido débil.
+Los pasos se detectan por movimiento real de posición del jugador, no solo por su velocidad sincronizada; no se generan pasos extra al ir montado. Los sonidos de otros mobs pueden ser investigados, pero los sonidos de origen ajeno no aportan el peso pequeño de ruido cotidiano a la cuenta de hordas del jugador.
 
-PRUEBAS EN EL JUEGO
-/zhorda helicoptero — fuerza el evento en supervivencia, Overworld, fuera de Pacífico y con doMobSpawning=true.
-/zhorda estado — muestra eventos y zombis pendientes.
-/zhorda parar — cancela refuerzos pendientes; los zombis existentes permanecen.
-Para ver el ritmo, deja llegar el grupo inicial y después mata unos pocos; no se libera una segunda masa completa de golpe. /zhorda noche, ruido y dia siguen disponibles. Los avisos en chat y sonidos se conservan.
+COMPATIBILIDAD DE IA
+SoundAttract sigue instalado y suministra los registros de ruido. Para zombis se retiran AttractionGoal, LeaderAttractionGoal, FollowLeaderGoal, FollowerEdgeRelayGoal y FollowScentGoal: el addon controla la investigación individual para evitar que la detección uniforme por sonido/olor o los líderes anulen el sigilo.
+Si Zombie Awareness está instalado, su tickAI se sustituye solo para los zombis reconocidos. Esto evita rutas hacia la posición exacta del jugador y sentidos paralelos que contradigan este sistema. Otros mobs conservan su IA de Zombie Awareness. La integración se verificó contra el JAR adjuntado anteriormente.
+Se conservan la navegación/combate nativos, los tratamientos y loot, y otros comportamientos de mods; las IA especiales pueden influir en el resultado y deben comprobarse en el pack.
+
+HELICÓPTERO Y HORDAS
+Se conserva el balance de 1.6.0: 15% diario, presupuesto 90/+20 por jugador adicional/máximo 150, hasta 18 iniciales para un jugador, máximo 4 por grupo cada 5 segundos, un refuerzo por muerte de un zombi del evento y límite local 24. Más jugadores aumentan moderadamente los iniciales y el límite. Los zombis que ya existen no se borran.
+No cambia los presupuestos nocturnos, las velocidades día/noche, la gracia ni la XP. La horda por ruido conserva 20% por intento válido y la espera de 2 minutos. La configuración del helicóptero sigue en balanceVersion=7 y se conservan tus ajustes actuales.
+
+COMANDOS
+/zhorda zombis — muestra perfiles de zombis a 24 bloques y cuántos te persiguen. Requiere operador.
+/zhorda helicoptero, noche, ruido, dia — fuerzan cada evento para probarlos.
+/zhorda estado y parar — consultan/cancelan oleadas pendientes, sin borrar zombis existentes.
+Para probar sigilo, usa supervivencia y un zombi que todavía no te haya visto; compara acercarte agachado, caminar normalmente, colocar un bloque y disparar. Si ya te perseguía, deja que pierda la línea de visión y expire su memoria antes de comparar.
 
 VALIDACIÓN
-Compilación Java 21 contra Minecraft 1.21.1, NeoForge 21.1.255 y SoundAttract 6.3.8d. 99 pruebas de perfiles/refuerzos, migración con conservación de ajustes, 9 comprobaciones de integración, 42 reglas generales de hordas y regresión de lotes de cofres. Verificación de estructura/pila de 26 clases. No se inició Minecraft en este entorno; falta comprobar jugabilidad e interacción completa con otras IA dentro del pack.
-Fuentes y recursos: zomboid-hordes-1.6.0-fuentes.zip. Código del addon GPL-3.0-only; audios proporcionados por el usuario conservan su origen.
+Java 21, Minecraft 1.21.1, NeoForge 21.1.255 y el SoundAttract exacto recién adjuntado. 138 comprobaciones de reparto/sigilo/ruido/refuerzos, 18 comprobaciones de integración (incluido el hook exacto de Zombie Awareness), 42 reglas generales de hordas, regresión de cofres y verificación de estructura/pila de 29 clases. No se inició Minecraft aquí: falta la prueba completa de renderizado, percepción y compatibilidad dentro de tu pack.
+Fuentes: zomboid-hordes-1.7.0-fuentes.zip. Código del addon GPL-3.0-only; audios conservan el origen proporcionado por el usuario.
