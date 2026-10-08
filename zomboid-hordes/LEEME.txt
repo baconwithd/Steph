@@ -1,7 +1,7 @@
-ZOMBOID HORDES 1.7.0 — sigilo y percepción por ruido estilo PZ
+ZOMBOID HORDES 1.8.0 — sigilo y percepción por ruido estilo PZ
 
 INSTALACIÓN
-Conserva tu soundattract-6.3.8d.jar y sustituye SOLO el addon Zomboid Hordes anterior por zomboid-hordes-1.7.0-neoforge-1.21.1.jar. Instala la misma versión en clientes y servidor; deja un solo JAR de este addon. Mantén Survivor Creator v13, First Aid 3.4.5, Zombie Remains Loot 1.4.1 y eZWeight v7.
+Conserva tu soundattract-6.3.8d.jar y sustituye el addon Zomboid Hordes anterior por zomboid-hordes-1.8.0-neoforge-1.21.1.jar. Instala la misma versión en clientes y servidor; deja un solo JAR de este addon. Mantén Survivor Creator v13, First Aid 3.4.5, Zombie Remains Loot 1.5.0 y eZWeight v7.
 El cambio está en el addon porque integra SoundAttract con la IA y las hordas del pack. El SoundAttract recién adjuntado se comprobó idéntico al que usamos previamente.
 
 PERFILES
@@ -28,18 +28,50 @@ Los pasos se detectan por movimiento real de posición del jugador, no solo por 
 COMPATIBILIDAD DE IA
 SoundAttract sigue instalado y suministra los registros de ruido. Para zombis se retiran AttractionGoal, LeaderAttractionGoal, FollowLeaderGoal, FollowerEdgeRelayGoal y FollowScentGoal: el addon controla la investigación individual para evitar que la detección uniforme por sonido/olor o los líderes anulen el sigilo.
 Si Zombie Awareness está instalado, su tickAI se sustituye solo para los zombis reconocidos. Esto evita rutas hacia la posición exacta del jugador y sentidos paralelos que contradigan este sistema. Otros mobs conservan su IA de Zombie Awareness. La integración se verificó contra el JAR adjuntado anteriormente.
-Se conservan la navegación/combate nativos, los tratamientos y loot, y otros comportamientos de mods; las IA especiales pueden influir en el resultado y deben comprobarse en el pack.
+Se reemplaza también la rotura de bloques de SoundAttract para los zombis: solo golpean puertas, trampillas y ventanas/cristales, con tiempos de rotura. Se conservan la navegación/combate nativos, los tratamientos y loot, y otros comportamientos de mods; las IA especiales pueden influir en el resultado y deben comprobarse en el pack.
 
 HELICÓPTERO Y HORDAS
 Se conserva el balance de 1.6.0: 15% diario, presupuesto 90/+20 por jugador adicional/máximo 150, hasta 18 iniciales para un jugador, máximo 4 por grupo cada 5 segundos, un refuerzo por muerte de un zombi del evento y límite local 24. Más jugadores aumentan moderadamente los iniciales y el límite. Los zombis que ya existen no se borran.
-No cambia los presupuestos nocturnos, las velocidades día/noche, la gracia ni la XP. La horda por ruido conserva 20% por intento válido y la espera de 2 minutos. La configuración del helicóptero sigue en balanceVersion=7 y se conservan tus ajustes actuales.
+No cambia los presupuestos nocturnos, la gracia ni la XP. La horda por ruido conserva 20% por intento válido y la espera de 2 minutos. La configuración del helicóptero sigue en balanceVersion=8 y se conservan tus ajustes actuales.
 
 COMANDOS
-/zhorda zombis — muestra perfiles de zombis a 24 bloques y cuántos te persiguen. Requiere operador.
+/zhorda zombis — muestra perfiles y velocidades de zombis a 24 bloques y cuántos te persiguen. Requiere operador.
 /zhorda helicoptero, noche, ruido, dia — fuerzan cada evento para probarlos.
 /zhorda estado y parar — consultan/cancelan oleadas pendientes, sin borrar zombis existentes.
 Para probar sigilo, usa supervivencia y un zombi que todavía no te haya visto; compara acercarte agachado, caminar normalmente, colocar un bloque y disparar. Si ya te perseguía, deja que pierda la línea de visión y expire su memoria antes de comparar.
 
+CAMBIOS 1.8.0 / REMAINS LOOT 1.5.0
+Instala también zombie-remains-loot-1.5.0-neoforge-1.21.1.jar en lugar del Remains Loot anterior, en clientes y servidor. Deja un solo JAR de cada addon. No reemplaces los JAR originales de SoundAttract, Sophisticated Backpacks, Self Expression ni Fracture Point; conserva sus dependencias.
+
+VELOCIDAD Y ARAÑAS
+No pueden aparecer nuevas arañas ni arañas de cueva. También siguen bloqueados esqueletos y creepers. No borra arañas guardadas de partidas anteriores.
+Reparto independiente del carácter/oído: 40% normales, 40% lentos, 15% muy lentos y 5% rápidos. Normal: aproximadamente 90% de la velocidad vanilla al caminar del jugador; lento: 75%; muy lento: 55%; rápido: 100%. La referencia es caminar sin efectos ni equipo que altere la velocidad, no correr, saltar, llevar sobrepeso o tener Speed II. De día se reduce otro ~5% frente a la noche. La navegación se limita incluso si un mod intenta pedir una velocidad excesiva; heridas, obstáculos y ciertas IA especiales pueden reducirla más.
+Cada entidad conserva su velocidad al guardar/cargar, y los zombis antiguos reciben una al actualizar. Se aplica también a los variantes/mutantes reconocidos. Mantiene las debilidades por golpes y piernas heridas. El movimiento de Mob usa la velocidad tanto como aceleración como entrada hacia delante; por eso se calcula la raíz del factor para mantener los porcentajes relativos en suelo.
+La configuración antigua pasa automáticamente a balanceVersion=8 (daySpeed=-0.025, nightSpeed=0), preservando los límites y probabilidades de hordas. Se suaviza además la inclinación del zombi torpe en reposo.
+
+OBSTÁCULOS
+Cuando persiguen o investigan un ruido, pueden golpear puertas, trampillas y ventanas/cristales cercanos que estén en su dirección. No buscan destruir construcciones sin motivo. Necesitan alcance <=2.25 bloques y una trayectoria de golpe hasta el obstáculo; no rompen a través de otras paredes ni cargan chunks nuevos.
+Cristal: ~3 s; trampilla de madera: ~6 s; puerta de madera: ~8 s; puerta/trampilla metálica: ~16 s. Mostrarán grietas y golpes antes de romper. Si abandonan, se borra el progreso. Requiere mobGriefing=true y respeta la comprobación de permiso de NeoForge. Funciona fuera de la dificultad Difícil también.
+
+BOTÍN DE CADÁVERES NUEVOS
+Munición garantizada si TaCZ tiene armas/municiones válidas cargadas. Común: 15–32; poco común: 24–48; raro: 36–64; épico: 48–96; legendario: 64–128 balas. Se reparten en uno o dos stacks, respetando el máximo del ítem. Se elige una vez por cadáver, incluso para mutantes que reciben dos rondas de loot. En bandidos se usa el calibre del arma que llevaban; en zombis, el de un arma encontrada o una de su tier si no hay arma en el cuerpo. El cargador de las armas del botín sigue separado de la reserva infinita de combate de los bandidos.
+Mochilas vacías de Sophisticated Backpacks: 8/12/18/24/30% según rareza, más 15 puntos porcentuales para bandidos y 10 para mutantes. Tipo normal/cobre/hierro/oro/diamante según rareza. Su peso lo controla tu mod de peso y la integración ya instalada.
+La ropa de Self Expression sigue en el pool principal; también se incorpora en el pool legendario. Armadura/ropa militar de Fracture Point: 1.5/2.5/4/6/8% según rareza; bandidos suman 8 puntos y mutantes 3. Se seleccionan solo piezas de armadura reales registradas, no armas/materiales/ítems internos. Las piezas comunes salen gastadas; las de alta rareza, menos gastadas.
+Los objetos siguen en posiciones desordenadas. Si el inventario está lleno, el nuevo loot prioritario reserva espacio reemplazando un objeto de utilidad, sin duplicar inventarios. El botín almacenado en cadáveres que ya existían no se vuelve a sortear.
+Al crear el cadáver se reproduce una sola vez el Blood Splatter Sound Effect adjuntado por el usuario. Convertido a mono para sonido posicional; duración ~2.6 s, sin bucle. No se reproduce al cargar cadáveres ni al abrirlos.
+Se conservan rarezas, minerales, decaimiento de 20 minutos, despellejado y destrucción de inventarios de Doomsday Decoration; los cadáveres del mod Corpse conservan su comportamiento anterior.
+
+RESOURCE PACK
+En resourcepacks, reemplaza el ZIP original de Blue’s Better Zombies v0.13 por Blues-Better-Zombies-v0.13-PZ-smooth.zip y actívalo. Solo es necesario en clientes. Necesita Entity Model Features y Entity Texture Features compatibles con NeoForge 1.21.1, o un motor CEM compatible.
+Se preservan las 73 imágenes originales y todas las variantes/modelos. Se modifican las fórmulas de 36 modelos: transiciones suaves al caminar/parar, una referencia incorrecta de inclinación, ataques acumulados excesivos, oscilaciones rápidas y raíces negativas al morir. Se quitan asignaciones duplicadas y la inclinación principal ya no depende de la proximidad del espectador. No sustituye los renderizadores GeckoLib propios de los mutantes.
+Autor original del resource pack: MrBlueYeti. Las texturas/modelos y audios mantienen su autoría y sus condiciones originales.
+
+PRUEBA EN EL PACK
+/zhorda zombis: perfiles, velocidades y perseguidores en 24 bloques.
+/zhorda dia o /zhorda noche: iniciar un grupo de prueba; no cambia la hora del mundo.
+Para comparar velocidades usa suelo plano, supervivencia y caminar sin efectos. Prueba una puerta/trampilla/vidrio entre tú y un zombi que ya te persigue, con mobGriefing=true. Mata zombis nuevos y comprueba 15–128 balas, mochila ocasional, ropa y sonido. Activa el resource pack actualizado y compara los movimientos en reposo/caminando/atacando.
+
 VALIDACIÓN
-Java 21, Minecraft 1.21.1, NeoForge 21.1.255 y el SoundAttract exacto recién adjuntado. 138 comprobaciones de reparto/sigilo/ruido/refuerzos, 18 comprobaciones de integración (incluido el hook exacto de Zombie Awareness), 42 reglas generales de hordas, regresión de cofres y verificación de estructura/pila de 29 clases. No se inició Minecraft aquí: falta la prueba completa de renderizado, percepción y compatibilidad dentro de tu pack.
-Fuentes: zomboid-hordes-1.7.0-fuentes.zip. Código del addon GPL-3.0-only; audios conservan el origen proporcionado por el usuario.
+Compilados con Java 21, Minecraft 1.21.1, NeoForge 21.1.255 y SoundAttract 6.3.8d exacto. Reglas de velocidad/distribución/munición/obstáculos, sigilo y ruido, migración de configuración, rarezas y regresiones de bandidos/mutantes/hordas aprobadas. Hooks exactos de Minecraft/SoundAttract y Zombie Awareness, estructura/pila de clases y JSON/archivos de recursos comprobados. Fórmulas suavizadas evaluadas a 30/60/144 FPS y texturas originales comparadas byte a byte.
+No se ha iniciado Minecraft aquí: falta comprobar visualmente las animaciones y la combinación completa de IA/loot dentro de tu pack.
+Fuentes: zomboid-hordes-1.8.0-fuentes.zip y zombie-remains-loot-1.5.0-fuentes.zip. El script de parche/prueba del pack se incluye con las fuentes de Hordes.
