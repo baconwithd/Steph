@@ -1,35 +1,31 @@
-ZOMBOID HORDES 1.5.0 — más zombis, velocidad y alcance
+ZOMBOID HORDES 1.6.0 — helicóptero moderado y zombis individuales
 
-Reemplaza el addon Zomboid Hordes anterior por zomboid-hordes-1.5.0-neoforge-1.21.1.jar. Conserva SoundAttract 6.3.8d y los demás mods del pack. Instala la misma versión en servidor/clientes. Usa también Zombie Remains Loot 1.3.0 para la calidad nueva del botín.
+INSTALACIÓN
+Reemplaza solo Zomboid Hordes 1.5.0 por zomboid-hordes-1.6.0-neoforge-1.21.1.jar. Deja un solo JAR de este addon. Instala la misma versión en servidor y clientes. Conserva SoundAttract 6.3.8d, Survivor Creator v13, First Aid 3.4.5, Zombie Remains Loot 1.4.1 y eZWeight v7.
 
-CORRECCIÓN 1.4.1 — CRASH DE COFRES
-El informe crash-2026-10-07_18.33.53-server.txt identifica ConcurrentModificationException en LootRestock.tick al avanzar un iterador de cofres. Se sustituye el iterador persistente del índice mutable por lotes estables separados del índice. Si durante la revisión se añaden o descargan cofres/chunks, el lote sigue siendo válido; se omiten posiciones retiradas y las nuevas se procesan en el siguiente ciclo. La descarga de chunks modifica el índice en el hilo del servidor. Se conserva el máximo de 128 candidatos por revisión, las tiradas nocturnas guardadas y las comprobaciones de inventario vacío/cerrado. No limpia contenido ni cambia el loot.
-La prueba reproduce el fallo del iterador antiguo y comprueba altas/bajas durante el procesamiento del lote, chunks descargados y visita de registros nuevos. Compilado y bytecode verificado; no se ejecutó Minecraft aquí.
-Sustituye solamente Zomboid Hordes 1.4.0. Conserva Zombie Remains Loot 1.4.1 y los demás mods.
+HELICÓPTERO
+Probabilidad diaria conservada: 15%. Presupuesto nuevo: 90 zombis para un jugador, +20 por jugador cercano adicional, máximo 150. Antes era 480/+120/máximo 800.
+Primero llegan hasta 18, en grupos de hasta 4 cada 5 segundos. Después cada muerte de un zombi generado por esa horda permite UN refuerzo, hasta agotar el presupuesto. No recibe créditos por descargar chunks, huir, desapariciones o matar zombis ajenos al evento.
+Se limita la zona de aparición a 24 zombis vivos cercanos, incluyendo los naturales y otras hordas. En multijugador se suman 4 iniciales y 6 al límite por jugador cercano adicional: máximos de 30 iniciales y 42 cercanos. Los refuerzos pendientes esperan si se alcanza ese límite. No se eliminan zombis naturales ni se recortan entidades ya aparecidas.
+El evento conserva su límite de 8 minutos; el presupuesto no garantiza que todos aparezcan. Usa terrenos/chunks cargados a 48–80 bloques, mínimo 40 de jugadores. Tickets, créditos y vínculo con cada zombi se guardan con el mundo. Las oleadas antiguas pendientes se ajustan al nuevo presupuesto cuando se procesan.
 
+ZOMBIS INDIVIDUALES
+Cada zombi conserva un perfil al guardar/cargar: 35% distraídos, 45% normales y 20% atentos. Varía el oído y la reacción. Un 12% adicional tiene oído muy reducido, combinado con cualquier perfil.
+Distancia visual base: 14/24/36 bloques; agacharte la reduce al 45%. Necesitan línea de visión para identificarte normalmente; a menos de 4 bloques reaccionan al verte. Los distraídos tardan aproximadamente 1–3 segundos, los normales 0,3–1,2 y los atentos hasta 0,3 segundos, además del intervalo de revisión de la IA.
+La investigación de sonidos considera distancia, oído individual y probabilidad de atención. Recuerdan un punto aproximado del ruido, con mayor error los distraídos. Algunos no reaccionan; otros llegan tarde. Al perder de vista al jugador conservan una memoria breve, en lugar de conocer siempre su posición. Si los atacas, reaccionan contra quien les hizo daño durante unos 10 segundos.
+Los que no tienen objetivo ni un ruido que investigar pueden detenerse brevemente y continuar deambulando. Se mantienen navegación y combates normales. La integración de SoundAttract retira solo AttractionGoal, LeaderAttractionGoal, FollowLeaderGoal y FollowerEdgeRelayGoal de los zombis, sustituyendo la atracción uniforme por el oído individual y evitando grupos coordinados por líderes. Se conservan otros comportamientos del pack, como olores, trepar y romper obstáculos; otros mods pueden seguir influyendo en la navegación.
+Se elimina la fijación automática del helicóptero a jugadores hasta 192 bloques: el helicóptero atrae por ruido, no les revela al jugador a través de paredes.
 
-BALANCE NUEVO
-Horda cada noche: 80 zombis por zona; +25 por jugador cercano, máximo 180. Llegan hasta 16 cada 2 segundos. Patrullas: 60% de posibilidad de 12 cada 90 segundos. Ruido: hasta 100, hasta 20 cada 2 segundos. Helicóptero: 15% diario, presupuesto 480 para un jugador, +120 por jugador cercano, máximo 800. Los grupos diurnos son de 8 por zona cada minuto, hasta 60 zombis normales cercanos. Los zombis de día también son más rápidos: +5% sobre su velocidad base, frente a +10% de noche. La noche conserva su aumento de daño.
-Límites generales: 300 cercanos y 600 del evento activos por nivel. Presupuestos no garantizan todos los zombis simultáneamente: oleadas esperan terreno/chunks válidos y se detienen al alcanzar los límites. Se realizan hasta 120 intentos de ubicación por revisión. No se cargan chunks para forzar apariciones ni se generan dentro de paredes. Las oleadas expiran tras 8 minutos.
-La configuración existente se migra una vez al balance nuevo (balanceVersion=4), conservando probabilidad del helicóptero, regeneración de cofres y otros valores no relacionados. Puedes personalizar después; no se sobrescribe al siguiente inicio.
+CONFIGURACIÓN
+config/zomboid-hordes.json se migra una vez a balanceVersion=7. Desde v6 solo cambia los valores del helicóptero; conserva las noches, velocidad diurna/nocturna, probabilidad diaria, rareza del ruido y regeneración de cofres. Las personalizaciones hechas después de migrar no se sobrescriben en el siguiente inicio.
+Nuevas opciones: helicopterInitial=18, helicopterActiveLimit=24, helicopterWaveSize=4, helicopterWaveIntervalTicks=100. Se conservan la gracia y las skills de Survivor Creator y las recetas anteriores.
 
-COMBATE
-Todos los jugadores reciben +2 bloques de alcance de interacción con entidades, sumados a su alcance actual. Sirve para golpear mobs y otros jugadores; no añade alcance para romper bloques ni para proyectiles. El modificador tiene ID fijo y no se acumula cada tick/reconexión.
-Los zombis ya no necesitan esperar un segundo de contacto y su IA cuerpo a cuerpo no añade cooldown después del ataque. Intentan morder al estar en alcance y con visión. Se mantiene la invulnerabilidad breve normal de Minecraft al recibir daño. También se conservan aturdimiento por golpes, fallo de mordida por lesiones en cabeza y debilitamiento por heridas en brazos/piernas.
-Se conservan los golpes con impulso: +25% corriendo y +50% corriendo/saltando, solo cuerpo a cuerpo. No aparecen zombis bebés, esqueletos ni creepers nuevos. Los zombis no se queman al sol.
-
-EVENTOS Y COMANDOS
-Todas las hordas anuncian su inicio en chat; el helicóptero usa tu audio y atrae zombis a la zona. Disparos, explosiones y correr cerca de grupos provocan ruido; agacharse y los silenciadores ayudan. Requiere supervivencia en Overworld, fuera de Pacífico y doMobSpawning=true.
-Con operador/trucos: /zhorda dia | noche | ruido | helicoptero. /zhorda estado muestra pendientes y /zhorda parar cancela oleadas cercanas pendientes, sin borrar zombis existentes.
-
-COFRES Y RECETAS CONSERVADOS
-10% por noche de preparar otra vez el loot de cofres/barriles generados vacíos y cerrados con tabla original conocida. No borra contenido; comprueba ambas mitades de cofres dobles. La tabla y última revisión sobreviven reinicios. No puede reconstruir tablas que vanilla borró antes de instalar esta función. Mirando un cofre: /zhorda loot estado; /zhorda loot probar fuerza la prueba al 100% sin esperar la noche ni modificar la probabilidad normal. chestRestockChance se configura en config/zomboid-hordes.json.
-2 slabs de madera iguales devuelven 1 tablón, incluido mosaico de bambú. Sigue funcionando el datapack Mosslorn opcional de la versión 1.3.0, si ya lo instalaste.
+PRUEBAS EN EL JUEGO
+/zhorda helicoptero — fuerza el evento en supervivencia, Overworld, fuera de Pacífico y con doMobSpawning=true.
+/zhorda estado — muestra eventos y zombis pendientes.
+/zhorda parar — cancela refuerzos pendientes; los zombis existentes permanecen.
+Para ver el ritmo, deja llegar el grupo inicial y después mata unos pocos; no se libera una segunda masa completa de golpe. /zhorda noche, ruido y dia siguen disponibles. Los avisos en chat y sonidos se conservan.
 
 VALIDACIÓN
-Compilación Java 21 contra Minecraft 1.21.1 y NeoForge 21.1.255; 42 comprobaciones de calendario/ruido/límites, migración de configuración y preservación de personalizaciones, 20 firmas de integración originales, retención de 9 mixins/10 inyecciones y verificación de pila/estructura de las 23 clases. Comprobados +2 de alcance, ausencia del temporizador de contacto y eliminación del cooldown solo en zombis. No se inició Minecraft en este entorno; prueba jugabilidad/rendimiento en tu pack con los comandos.
-Fuentes y recursos del addon: zomboid-hordes-1.5.0-fuentes.zip. GPL-3.0-only para el código; los audios conservan su origen suministrado por el usuario.
-
-NOVEDAD 1.4.2: velocidad de zombis ligeramente reducida. daySpeed=0.10 y nightSpeed=0.20. La configuración existente se migra una vez al balanceVersion=5 cambiando solo estas dos velocidades cuando ya tenía balanceVersion=4. Se conservan número de zombis, loot y arreglo del crash de cofres. Las personalizaciones posteriores se respetan al reiniciar.
-
-NOVEDADES 1.5.0: hordas a 48–80 bloques, mínimo 40 de jugadores; noiseHordeChance=0.20 por intento, con espera consumida también al fallar. Se conserva la investigación de sonido y el número de zombis por horda. Migración balanceVersion=6: daySpeed=.05, nightSpeed=.10 y noiseHordeChance=.20. Comandos de pruebas omiten la probabilidad para seguir siendo útiles. Survivor Creator v12 gestiona la gracia y la cola de skills.
+Compilación Java 21 contra Minecraft 1.21.1, NeoForge 21.1.255 y SoundAttract 6.3.8d. 99 pruebas de perfiles/refuerzos, migración con conservación de ajustes, 9 comprobaciones de integración, 42 reglas generales de hordas y regresión de lotes de cofres. Verificación de estructura/pila de 26 clases. No se inició Minecraft en este entorno; falta comprobar jugabilidad e interacción completa con otras IA dentro del pack.
+Fuentes y recursos: zomboid-hordes-1.6.0-fuentes.zip. Código del addon GPL-3.0-only; audios proporcionados por el usuario conservan su origen.
