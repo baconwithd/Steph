@@ -1,7 +1,11 @@
-SURVIVOR CREATOR v12 — gracia de aparición y progreso gradual
-Reemplaza Survivor Creator v11 por survivorcreator-neoforge-1.21.1-1.0.7-zomboid-v12-grace-progress.jar; deja solo un JAR del mod. Usa la misma versión en servidor y clientes. Conserva First Aid 3.4.4, Zombie Remains Loot 1.4.1 y eZWeight v7. Instala Zomboid Hordes 1.5.0 para distancia, velocidad y frecuencia nuevas.
-200 ticks de gracia después de crear el personaje o reaparecer, con Velocidad II y cancelación de daño entrante. El tiempo no se consume en el menú de creación; reconectar no renueva una gracia ya iniciada. La XP se bloquea durante la gracia.
-Ritmos: Fitness 20% de la XP anterior; agilidad 25%; combate/armas 35%; oficios/supervivencia 50%, con división adicional por 1+0.1*nivel. Conserva XP y niveles anteriores. El multiplicador global se limita a 1; valores inferiores ralentizan más. Avisos/sound/chat en cola FIFO cada 90 ticks; las mejoras se aplican y guardan al subir. Limpieza al morir/desconectar/detener servidor. Las skills sin bonus implementado lo indican. El ciclo de slabs no genera XP.
-GUIA-SKILLS-v12.md explica las 26 skills, XP y efectos reales, incluyendo las que siguen sin bonus o sin eventos de XP. No se inventan efectos para skills pendientes.
-VALIDACIÓN: compilación Java 21; pruebas de ritmos de 26 skills y cola FIFO con nuevos avisos durante una animación; comprobación de hooks de XP/cola/gracia, metadatos y ZIP; estructura/pila de las 56 clases verificada. No se inició Minecraft aquí.
-Fuentes del cambio: survivorcreator-v12-grace-progress-fuentes.zip, con helper classes, parche ASM reproducible y pruebas. Aplica a tu v11 exacta; se conservan sus correcciones de menús, linterna, trabajo y popup. Código del cambio bajo MIT, conservando metadatos del mod.
+SKILLS ACTIVAS v13 + FIRST AID 3.4.5
+
+Reemplaza Survivor Creator v12 por survivorcreator-neoforge-1.21.1-1.0.8-zomboid-v13-active-skills.jar y First Aid 3.4.4 por firstaid-1.21.1-ZOMBOID-v3.4.5-skills-menu.jar. Instala ambos juntos en servidor y clientes; elimina los JAR anteriores de estos dos mods.
+
+Conserva Zomboid Hordes 1.5.0, eZWeight v7 y los demás mods. No cambia el evento de helicóptero ni las probabilidades de infección anteriores.
+
+Nueve skills activas; menú estilo Project Zomboid con casillas de nivel y tooltips de XP, sincronizado en multijugador. Pesca y primeros auxilios tienen beneficios reales. Fitness y Fuerza dan +1 punto de vida máxima por nivel cada una. Avisos de daño blanco normal, dorado crítico, rojo headshot. Nuevas recetas para trampillas, carteles normales/colgantes y trampillas de hierro.
+
+Lee GUIA-SKILLS-v13.md para todos los beneficios, límites y acciones que dan experiencia. Compilación y pruebas offline correctas; pendiente verificar en Minecraft con el pack completo.
+
+Los fuentes de los helpers y el parche ASM, recursos y pruebas están en skills-v13-firstaid-fuentes.zip. Survivor Creator conserva licencia MIT; la integración modificada de First Aid conserva GPLv3 (API LGPLv2.1), como el mod original. El ZIP incluye fuentes de cambios; los JAR originales de referencia no se incluyen.

@@ -1,0 +1,11 @@
+SKILLS ACTIVAS v13 + FIRST AID 3.4.5
+
+Reemplaza Survivor Creator v12 por survivorcreator-neoforge-1.21.1-1.0.8-zomboid-v13-active-skills.jar y First Aid 3.4.4 por firstaid-1.21.1-ZOMBOID-v3.4.5-skills-menu.jar. Instala ambos juntos en servidor y clientes; elimina los JAR anteriores de estos dos mods.
+
+Conserva Zomboid Hordes 1.5.0, eZWeight v7 y los demás mods. No cambia el evento de helicóptero ni las probabilidades de infección anteriores.
+
+Nueve skills activas; menú estilo Project Zomboid con casillas de nivel y tooltips de XP, sincronizado en multijugador. Pesca y primeros auxilios tienen beneficios reales. Fitness y Fuerza dan +1 punto de vida máxima por nivel cada una. Avisos de daño blanco normal, dorado crítico, rojo headshot. Nuevas recetas para trampillas, carteles normales/colgantes y trampillas de hierro.
+
+Lee GUIA-SKILLS-v13.md para todos los beneficios, límites y acciones que dan experiencia. Compilación y pruebas offline correctas; pendiente verificar en Minecraft con el pack completo.
+
+Los fuentes de los helpers y el parche ASM, recursos y pruebas están en skills-v13-firstaid-fuentes.zip. Survivor Creator conserva licencia MIT; la integración modificada de First Aid conserva GPLv3 (API LGPLv2.1), como el mod original. El ZIP incluye fuentes de cambios; los JAR originales de referencia no se incluyen.
