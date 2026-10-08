@@ -1,0 +1,38 @@
+MELEE 2.2.0 + EZWEIGHT ESTAMINA V9 — Minecraft 1.21.1 / NeoForge
+
+INSTALACIÓN
+Reemplaza ambos JAR anteriores en clientes y servidor:
+- eZWeight-neoforge-1.21.1-1.8.4-stamina-v9-combat.jar
+- zomboid-global-melee-animations-2.2.0-stock-shove-hud.jar
+Deja una sola versión de cada mod. Conserva TaCZ hotfix-r7, LesRaisins safe, Farmer's Delight, Player Animator y los demás mods del pack.
+No necesitas quitar zomboid-project-progression-fitness-stamina-hud: la compatibilidad de eZWeight desactiva únicamente su cálculo antiguo de estamina y su indicador duplicado, manteniendo sus demás funciones.
+
+CORRECCIÓN DE ESTAMINA
+El mod de progresión 1.0.2 tenía otra reserva de energía y otro bloqueo de sprint, además de una barra propia. V8 añadió una segunda reserva y una columna de iconos. Los cálculos y los indicadores podían diferir; en singleplayer las tablas estáticas de progresión compartían datos entre el servidor y el HUD.
+V9 mantiene una sola autoridad de estamina, la de eZWeight, sincronizada desde el servidor. Desactiva updateStamina del mod de progresión, dirige su consulta de porcentaje a eZWeight y oculta solo su primer indicador (estamina), preservando el segundo (peso).
+El HUD de eZWeight ahora dibuja una barra vertical, en el espacio que ocupaba la estamina de progresión. Ya no dibuja la columna de diez corredores. Si ves dos barras verticales lado a lado, son estamina y peso, no dos estaminas.
+Capacidad: 3000. Al agotarte, bloquea correr, saltar y ataques/empujones hasta recuperar 600 puntos (20%). Recuperar un punto no permite correr. En agotamiento, la barra es roja. Caminar está permitido.
+Espera de regeneración: 2 segundos desde el último gasto. Recupera 5 puntos/tick quieto o 2.5 caminando. Correr consume 1 punto/tick, 1.25 en el aire. La estamina no se regenera al correr efectivamente.
+Costes conservados: golpe normal 60, pesado 120, empujón 45, salto 25. Conserva el triple de capacidad, el cooldown normal -25% y el daño pesado +50%, con el cooldown pesado original.
+
+V / GOLPE DE CULATA
+Usa la tecla de melee configurada en TaCZ (V por defecto) para el empujón de todas las armas, incluidas melee.
+Las armas TaCZ usan el evento bayonet_stock / animación melee_stock, el mismo del golpe con culata; ya no se selecciona bayonet_push. Si el arma carece del clip stock, se proporciona el clip de rifle predeterminado de TaCZ.
+Las armas melee de LesRaisins y las espadas/sartén del bridge reproducen el clip melee_stock en su controlador de animación compartido con TaCZ. No se suma el desplazamiento simple anterior al clip nativo.
+Las armas sin controlador y los casos sin acceso al clip nativo usan las curvas de movimiento de la misma animación de rifle, adaptadas al renderizado de mano/modelo. La adaptación no crea huesos ni brazos que no existan en el modelo de otra arma.
+El cliente no envía coordenadas ni decide el objetivo. El servidor valida estamina, espera, cono frontal, obstáculos y alcance. Conserva el máximo de tres objetivos y el alcance de 3 bloques; no se confunde el alcance de selección con el retroceso.
+Retroceso: fuerza 0.55, frente a 0.85 en 2.1.0 (~35% menos). La distancia física depende de la resistencia al retroceso, velocidad previa y obstáculos.
+Aturdimiento: 15 ticks (0.75 segundos a 20 TPS), según la última corrección del usuario. Los zombis no avanzan mediante su IA ni dañan al jugador durante ese intervalo, conservando el retroceso físico. No es un ataque adicional que quite vida.
+
+VALIDACIÓN
+Compilación Java 21 y comprobación del bytecode aprobadas. Pruebas del bloqueo tras agotarse, recuperación, gasto al correr después de recuperar el umbral, costes y reglas de combate aprobadas.
+Comprobados los métodos y la llamada exacta al primer indicador en el JAR adjuntado de progresión 1.0.2; el segundo indicador de peso permanece intacto. Las pruebas de reflexión con dobles de prueba verifican la inserción/reutilización del clip stock, el evento de culata y la reproducción en el controlador melee.
+No se ha ejecutado Minecraft en este entorno. Falta verificar visualmente dentro del pack y en multijugador el HUD, las poses de cada modelo y la API del TaCZ hotfix-r7 exacto. Ese TaCZ supera el límite de transferencia de 32 MiB; la compatibilidad utiliza su API pública y reflexión, con movimiento alternativo cuando no está disponible.
+Las pruebas de API simulada no sustituyen una ejecución con TaCZ real. El log avisa si no consigue usar la animación nativa: "Native stock animation unavailable; using shared rifle stock motion".
+
+FUENTES
+combat-estamina-v9-melee-2.2.0-fuentes.zip contiene Java, builder, helpers y pruebas. Los helpers/dobles de prueba no se incluyen en los JAR instalables.
+Reconstrucción:
+python build.py --minecraft CLIENT-SRG.jar --neoforge NEOFORGE.jar --lrtactical LESRAISINS.jar --weight EZWEIGHT-V7.jar --melee MELEE-2.0.0.jar --libs LIBS --out-dir OUTPUT
+Requiere Java 21, ecj.jar y las bibliotecas de Minecraft/NeoForge. Los originales se preservan excepto las clases/registro afectados por el combate y la estamina.
+Curvas de movimiento derivadas de rifle_default.animation.json / melee_stock de TaCZ, proyecto MCModderAnchor/TACZ. La animación nativa se obtiene del TaCZ instalado. Los recursos originales conservan su autoría y condiciones originales.
