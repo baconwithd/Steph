@@ -1,12 +1,14 @@
-FIRST AID ZOMBOID v3.4.3 — lesiones críticas menos letales
+FIRST AID ZOMBOID v3.4.4 — lesiones críticas menos letales
 
-Cierra Minecraft. Reemplaza el First Aid anterior por firstaid-1.21.1-ZOMBOID-v3.4.3-critical-care.jar; deja solo un JAR First Aid. Usa el mismo archivo en servidor y clientes.
+Cierra Minecraft. Reemplaza el First Aid anterior por firstaid-1.21.1-ZOMBOID-v3.4.4-low-infection.jar; deja solo un JAR First Aid. Usa el mismo archivo en servidor y clientes.
 
 Cabeza y torso reciben el 50% del daño localizado anterior, incluyendo pérdida de salud por sangrado. Los cortes nuevos en esas partes pasan una tirada adicional del 20%; las mordidas del zombi cuyo mayor daño cae ahí también pasan esa tirada antes de procesar infección, protección de ropa y mensajes. El sangrado aleatorio derivado de golpes también pasa el filtro del 20% para esas partes. No son inmunes y heridas graves sin tratar aún pueden matar. Se conservan las heridas ya existentes y sus tratamientos.
-Los proyectiles conservan su localización real y su registro de herida de bala: el daño crítico se reduce sin convertir un disparo directo a la cabeza en un disparo a la pierna. Las extremidades conservan sus probabilidades originales. No cambia la probabilidad global de infección de una mordida que sí ocurre.
+Los proyectiles conservan su localización real y su registro de herida de bala: el daño crítico se reduce sin convertir un disparo directo a la cabeza en un disparo a la pierna. Las extremidades conservan sus probabilidades originales. La probabilidad de infección de una mordida confirmada pasa de 75% a 50% sin protección; la protección de ropa mantiene la misma reducción adicional. Aplica a mordidas futuras y no cura infecciones ya existentes.
 
 Se conservan el arreglo del HUD, los consumibles sin sonido en bucle y la textura roja de tela sucia de v3.4.2. Del JAR suministrado solo cambian DamageablePart, ClinicalHooks, Bleeding y la versión; se añade CriticalCare.class.
 
 VALIDACIÓN: 19 comprobaciones ejecutando el helper compilado contra fixtures de jugador/modelo: daño, umbrales de corte/mordida/sangrado y conservación de lesiones/tratamientos existentes. Estructura y pila de las 206 clases verificadas; ZIP íntegro; comparadas todas las entradas con la versión suministrada. No se inició Minecraft en este entorno.
 
-FUENTES: firstaid-v3.4.3-critical-care-fuentes.zip contiene CriticalCare.java, el parche ASM reproducible y fixtures de prueba. Incluye los parches anteriores disponibles. Fuentes base v3.4: rama codex/firstaid-lr-installer, carpeta fuentes_firstaid_v34 de baconwithd/Steph. Se conservan los avisos GPLv3/LGPLv2.1 originales.
+FUENTES: firstaid-v3.4.4-low-infection-fuentes.zip contiene CriticalCare.java, el parche ASM reproducible y fixtures de prueba. Incluye los parches anteriores disponibles. Fuentes base v3.4: rama codex/firstaid-lr-installer, carpeta fuentes_firstaid_v34 de baconwithd/Steph. Se conservan los avisos GPLv3/LGPLv2.1 originales.
+
+NOVEDAD 3.4.4: solo se modifica el método infectionChance de TreatmentV33 y la versión del JAR 3.4.3. Se conserva el resto byte por byte. Prueba ejecutando el método real: máximo 50%, protección de ropa y límites comprobados.
