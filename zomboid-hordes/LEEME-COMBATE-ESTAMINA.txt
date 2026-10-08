@@ -1,0 +1,43 @@
+COMBATE 2.1.0 + EZWEIGHT ESTAMINA V8 — Minecraft 1.21.1 / NeoForge
+
+INSTALACIÓN
+Reemplaza ambos JAR anteriores por:
+- zomboid-global-melee-animations-2.1.0-shove-stamina.jar
+- eZWeight-neoforge-1.21.1-1.8.4-stamina-v8-combat.jar
+Instala los mismos dos archivos en clientes y servidor; deja una sola versión de cada mod. El addon requiere la versión v8 de eZWeight, porque incorpora la API de estamina que usa el combate.
+Mantén tus TaCZ hotfix-r7 y LesRaisins jsononly-safe originales, además de las dependencias de tu bridge 2.0.0 (Farmer's Delight y Player Animator). Mantén Zomboid Hordes 1.8.0 y Zombie Remains Loot 1.5.0 y el resto del pack.
+
+CONTROLES Y DAÑO
+V / la tecla de melee configurada en TaCZ: empujón con cualquier arma o herramienta, incluyendo pistolas, armas largas, armas melee, espadas y sartén. También funciona con la mano vacía.
+Calcula objetivos en el servidor: hasta 3 entidades delante, alcance máximo 3 bloques, cono frontal y sin atravesar paredes. Cuesta 45 puntos de estamina, incluso si falla. Espera entre empujones: 15 ticks (~0.75 s). El empujón aplica retroceso y no es un ataque de daño independiente. Respeta restricciones de PvP del jugador.
+Los zombis empujados pierden movimiento por su IA y no pueden dañarte durante 10 ticks (~0.5 s). El retroceso conserva su movimiento físico. Reconoce zombis vanilla, variantes y mutantes del pack. Conservan el objetivo después de recuperarse. Los golpes normales posteriores siguen utilizando tus reglas de heridas/aturdimiento de Hordes.
+La detección incluye los eventos nativos de melee de TaCZ para evitar un doble golpe si TaCZ envía también su paquete original. Los NPC/bandidos conservan su melee nativo. La animación de armas de fuego usa el estado nativo de empuje cuando el gun pack lo tiene. Las armas melee de LesRaisins y del bridge reciben una breve animación de avance en primera persona.
+
+GOLPE NORMAL
+Tiempo de espera reducido un 25%: usa el 75% del original. En melee de LesRaisins y el bridge también adelanta el momento del impacto en la misma proporción para mantener el protocolo de ataque válido. Cada intento aceptado cuesta 60 puntos, aunque falle o alcance varios objetivos.
+Los ataques vanilla ajenos al sistema de LesRaisins también tienen un 25% menos de espera y gastan 60 al realizar un ataque contra una entidad. No hay cargo doble para espadas/sartén que estén utilizando el bridge nativo.
+
+GOLPE PESADO
+Clic derecho / acción pesada de LesRaisins, en las armas que ya la admiten: 50% más daño respecto al anterior, antes de las defensas y modificadores posteriores. Mantiene el tiempo de espera e impacto original. Cuesta 120 puntos, el doble del normal. No cambia el daño de las balas.
+La interpretación se corrigió siguiendo la respuesta del usuario: +50% de daño pesado, no reducción de su cooldown.
+
+ESTAMINA
+Máximo: 3000 puntos, +200% respecto a los 1000 anteriores.
+Corre y descuenta solo en el servidor cuando existe movimiento real: 1 punto por tick en suelo; 1.25 en el aire. Saltar cuesta 25 puntos aparte. Regeneración: 5 por tick quieto o 2.5 caminando, tras 40 ticks (~2 s) sin un gasto que reinicie la espera.
+Al llegar a cero entra en agotamiento y bloquea correr, saltar y ataques/empujones. Volver a tener 1 punto no desbloquea nada: tiene que recuperar al menos 600 puntos, el 20% de la barra. Puede caminar mientras se recupera. Un ataque/salto también se rechaza si no tiene energía suficiente para pagar su coste completo.
+En agotamiento, los iconos recuperados aparecen rojos; al recuperar el umbral vuelven a su color normal. La barra recibe los datos del servidor cada 5 ticks y cuando hay un gasto. El cliente predice los gastos de sus ataques, pero no decide el valor real. Se limpian datos del cliente al desconectar y se descartan actualizaciones atrasadas.
+La energía y el bloqueo se guardan con el jugador. Desconectarse no rellena la barra. Una nueva vida recupera la capacidad completa. Creativo y espectador están exentos. Se conserva el cálculo de peso, los 50 kg iniciales y la reducción de contenido de mochilas de tu eZWeight v7.
+La clase de estamina del JAR v7 no tenía sus eventos de tick ni de HUD registrados; esta versión registra ambos y sincroniza cliente/servidor.
+
+VALIDACIÓN Y LÍMITES
+Compilado con Java 21, tu Minecraft 1.21.1, NeoForge 21.1.255 y el LesRaisins exacto adjuntado. Pruebas de agotamiento/recuperación, carrera prolongada, costes, cooldown normal y daño pesado, firmas exactas de Minecraft y LesRaisins, estructura/pila del bytecode y preservación de código/recursos anteriores aprobadas.
+No se ha ejecutado Minecraft aquí. Falta comprobar en el pack los estados de animación del arma, los controles de TaCZ, el retroceso y la sincronización multijugador.
+El archivo TaCZ adjuntado supera el límite de transferencia de 32 MiB de esta sesión y no pudo extraerse. La compatibilidad usa sus APIs públicas conocidas y una conexión por reflexión al evento GunMeleeEvent. Los hooks opcionales de controles evitan fallar el arranque si cambia una firma; el fallback del evento del servidor convierte el ataque nativo en un único empujón. Los gun packs sin estado bayonet_push tienen solo el movimiento de mano disponible.
+En latest.log busca "[ZomboidMelee] TaCZ gun melee routed to one server shove" para confirmar la conexión. Un mensaje "hook unavailable" indica que hay que revisar la API de esa instalación.
+
+FUENTES Y RECONSTRUCCIÓN
+combat-estamina-v8-melee-2.1.0-fuentes.zip contiene los cambios de Java, helpers de compilación, builder y pruebas; no incluye los JAR originales de dependencias.
+Requiere Java 21, ECJ (ecj.jar), las bibliotecas habituales de Minecraft/NeoForge en una carpeta de libs y los originales adjuntados: eZWeight v7, bridge melee 2.0.0, LesRaisins safe, Minecraft y NeoForge. Los helpers sirven para compilar, pero se excluyen de los JAR de salida.
+Ejemplo:
+python build.py --minecraft CLIENT-SRG.jar --neoforge NEOFORGE.jar --lrtactical LESRAISINS.jar --weight EZWEIGHT-V7.jar --melee MELEE-2.0.0.jar --libs LIBS --out-dir OUTPUT
+Los recursos originales conservan su autoría y condiciones originales.
