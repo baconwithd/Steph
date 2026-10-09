@@ -1,0 +1,49 @@
+TACZ NPCs Tactical 1 — versión experimental para NeoForge / Minecraft 1.21.1
+
+Instalación:
+1. Conserva una copia del mundo y del JAR original.
+2. Quita tacznpcs-2.1.0-1.21.1.jar de mods y coloca tacznpcs-2.1.0-1.21.1-tactical.1.jar.
+3. Conserva el TACZ original y las demás dependencias. No instales los dos JAR de NPCs juntos.
+4. En multijugador usa esta versión tanto en servidor como en clientes.
+
+Cambios implementados:
+- Patrón de diez disparos: tres trayectorias precisas; siete desplazadas lateralmente.
+  Contra jugadores la altura objetivo es 28% de la estatura: piernas/abdomen bajo.
+  No garantiza impactos: cobertura, movimiento, dispersión del arma y latencia afectan al resultado.
+- Ráfagas automáticas ampliadas de 1–1/1–2/1–3 a 4–6, 5–9 y 6–11 según categoría.
+  Las categorías de tiro individual conservan un disparo por ráfaga.
+- Menor pausa entre ráfagas en las categorías antes más lentas.
+- Recálculo de ruta de ataque cada 5–10 ticks, frente a 20–40.
+- Alcance de seguimiento de NPCs nuevos: 64 bloques, frente a 48.
+- Trazadora cada dos disparos cuando el arma admite trazadoras; respeta el valor -1 deshabilitado.
+- Pequeño fogonazo con partículas FLAME en cada disparo confirmado. No añade luz dinámica real.
+- Bandidos reconocidos por plantilla con nombre bandit/illager o facción opuesta a players.
+  Buscan jugadores visibles en supervivencia; no seleccionan creativos/espectadores por esta lógica.
+- Evalúan zombis y aliados en 24 bloques cada cinco ticks.
+  Huyen con al menos cuatro amenazas y tres zombis por aliado, o con dos amenazas y salud inferior al 30%.
+  La retirada dura al menos 60 ticks y usa rutas terrestres. Solo se inicia si existe una posición de escape.
+- Contraatacan zombis cercanos y buscan objetos tirados a 16 bloques cuando no están en combate.
+  Aprovechan la recogida original de armas/armadura; buscan mejoras, no objetos de categorías inferiores.
+  Las armas se ordenan por categoría (pistola, SMG, escopeta, rifle/francotirador, ametralladora).
+  No evalúa DPS real ni abre cofres ni inventarios de cadáveres. Lootea los objetos soltados por zombis.
+- Como máximo un encuentro en cada región de cinco chunks contiguos en X y un chunk en Z.
+  Selecciona un chunk por región y genera un bandido o grupos de 2–4, en chunks cargados cerca del jugador.
+  Evita agua, colisiones y aparición a menos de 32 bloques de cualquier jugador.
+  Limita la densidad cuando ya existen doce NPCs a 80 bloques de un jugador.
+  Usa bandits si existe esa plantilla; en caso contrario illagers. No crea ni sustituye configuraciones.
+  Registra regiones usadas en <mundo>/data/tacznpcs-bandits-<dimension>.properties.
+  Los NPCs generados son persistentes. Las condiciones de seguridad pueden impedir un encuentro.
+
+Validación realizada:
+- Compilación con Java 21.
+- Análisis de las 34 clases del JAR mediante ASM BasicVerifier y comprobación ZIP.
+- Pruebas simuladas de tres trayectorias precisas por diez disparos, altura baja, reintentos de cooldown,
+  retirada ante superioridad zombi, movimiento continuo, duración mínima y final de retirada.
+- NO probado dentro de Minecraft/NeoForge. La verificación de bytecode no valida las APIs del juego.
+  Esta versión usa reflexión para integrar la IA sin disponer de las dependencias completas.
+  Revisa latest.log y los mensajes [TacZ NPCs Tactical] al probarla.
+
+Pendiente:
+No se pudo transferir tacz-neoforge-1.21.1-1.1.8-hotfix-r7.jar: supera el límite de 32 MiB.
+Por tanto no se modificó ese archivo, el alcance de su sonido ni los efectos reales de impacto.
+Para continuar se necesita el JAR dividido en partes de menos de 32 MiB, por ejemplo volúmenes 7-Zip de 20 MiB.
