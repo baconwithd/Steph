@@ -1,0 +1,17 @@
+{
+  "shader_compile_link": "Mesa llvmpipe PASS",
+  "framebuffer_copy_formats": [
+    "D24",
+    "D32F",
+    "D24S8"
+  ],
+  "armor_helper_fixture_checks": 11,
+  "deferred_frame_fixture_checks": 8,
+  "prior_regressions": [
+    "ACTUAL_BULLET_TICK_REFLECTION_CORPSE_HIT=PASS\nACTUAL_BULLET_CORPSE_CONTAINER_OCCLUSION_AND_POSED_RAY=PASS",
+    "MOVING_ZOMBIE_ALL_REGIONS_ENTRY_SURFACE_AND_BODY_YAW_CHECKS=217",
+    "MEDICAL_POSTURE_PERSISTENCE_HEALING_CORPSE_AND_COLLISION_CHECKS=4030"
+  ],
+  "full_minecraft_modpack_run": false,
+  "bytecode_verification_log": "Note: /workspace/work/medical53/flash-src/net/flashlight/battery/Capture53.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n/workspace/work/medical53/output/zomboid-zombie-gore-1.0.20-neoforge-1.21.1-npc-render-pose.37.jar verified 176 classes\n/workspace/work/medical53/output/ragdollified-1.21.1-1.1.5-fracturepoint-pose.30.jar verified 1139 classes\n/workspace/work/medical53/output/flashlight-5.1-neoforge-1.21.1-single-scene-copy.20.jar verified 59 classes\n/workspace/work/medical53/output/fracturepoint-1.21.1-3.0.0-PT2-ragdoll-armor.15.jar verified 218 classes\n/workspace/work/medical53/output/hardcore_true_darkness-6.1-night-visibility.5-after-iris.jar verified 29 classes\n"
+}
