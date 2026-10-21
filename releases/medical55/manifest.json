@@ -1,0 +1,35 @@
+{
+  "release": 55,
+  "files": [
+    {
+      "name": "dungeons_iso-neoforge-3.6.2+1.21.1-zomboid-tacz.34-finite-aim.jar",
+      "bytes": 410796,
+      "sha256": "d63600ff08a75de906e63a114d4ffe93788b5b0d96fc23d61bb7f020a0d11449"
+    },
+    {
+      "name": "firstaid-1.21.1-ZOMBOID-v3.6.18-visible-bandage-marks.jar",
+      "bytes": 1640738,
+      "sha256": "e2cca3ff9f6b987d12545149324c91487cd6dce67d23c08829b1faf420eb6fda"
+    },
+    {
+      "name": "flashlight-5.1-neoforge-1.21.1-soft-map-occlusion.22.jar",
+      "bytes": 3722233,
+      "sha256": "95a2c8f2e9c33780841d26addd5e5822adcdcbf05bfe89cb994253a1839f7bdf"
+    },
+    {
+      "name": "hardcore_true_darkness-6.1-night-visibility.6-soft-ambient.jar",
+      "bytes": 64509,
+      "sha256": "f46e80671d99f610688d5fb04f2b9ab4220a814b7fe92b1a1b0e6097b5320d33"
+    },
+    {
+      "name": "ragdollified-1.21.1-1.1.5-armor-provider-ref.31.jar",
+      "bytes": 9513477,
+      "sha256": "08f736aec84427ce66471ed89e92fa7c81faa06cf4733ad2a2f9a740aa3cf13e"
+    },
+    {
+      "name": "zomboid-zombie-gore-1.0.20-neoforge-1.21.1-live-body-hits-bandages.38.jar",
+      "bytes": 432868,
+      "sha256": "668448dd5e862252cf8085736d4eda92c236dfb0300d588fa9585f12492106a5"
+    }
+  ]
+}

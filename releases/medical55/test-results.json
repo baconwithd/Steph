@@ -1,0 +1,17 @@
+{
+  "java21_asm": "Note: /workspace/work/medical55/src/dev/zomboid/gore/Bullet13.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\nNote: /workspace/work/medical55/flash-src/net/flashlight/battery/Capture53.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n/workspace/work/medical55/output/zomboid-zombie-gore-1.0.20-neoforge-1.21.1-live-body-hits-bandages.38.jar verified 177 classes\n/workspace/work/medical55/output/ragdollified-1.21.1-1.1.5-armor-provider-ref.31.jar verified 1139 classes\n/workspace/work/medical55/output/flashlight-5.1-neoforge-1.21.1-soft-map-occlusion.22.jar verified 59 classes\n/workspace/work/medical55/output/firstaid-1.21.1-ZOMBOID-v3.6.18-visible-bandage-marks.jar verified 287 classes\n/workspace/work/medical55/output/dungeons_iso-neoforge-3.6.2+1.21.1-zomboid-tacz.34-finite-aim.jar verified 150 classes\n/workspace/work/medical55/output/hardcore_true_darkness-6.1-night-visibility.6-soft-ambient.jar verified 29 classes\n",
+  "prior_regressions": [
+    "ACTUAL_BULLET_TICK_REFLECTION_CORPSE_HIT=PASS\nACTUAL_BULLET_CORPSE_CONTAINER_OCCLUSION_AND_POSED_RAY=PASS",
+    "MOVING_ZOMBIE_ALL_REGIONS_ENTRY_SURFACE_AND_BODY_YAW_CHECKS=217",
+    "MEDICAL_POSTURE_PERSISTENCE_HEALING_CORPSE_AND_COLLISION_CHECKS=4030"
+  ],
+  "bandage_snapshot_fixture": "PASS",
+  "bandaged_bite_geometry_checks": 64,
+  "native_armor_instruction_jvm": "PASS",
+  "native_tacz_live_damage_dispatch_fixture": "PASS",
+  "own_npc_collider_priority_fixture": "PASS",
+  "isometric_finite_nonzero_aim_fixture": "PASS",
+  "flashlight_darkness_glsl150_compile_link": "PASS Mesa llvmpipe",
+  "controlled_plane_real_gl_soft_falloff": "PASS",
+  "full_modpack_run": false
+}
