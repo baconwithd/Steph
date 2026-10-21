@@ -1,0 +1,18 @@
+{
+  "minecraft_tested": false,
+  "shader_driver": "Mesa llvmpipe EGL, GLSL 150 compile/link only",
+  "behavioral_boundary": "Production helpers with simulated Minecraft/NeoForge/Iris APIs. No full modpack or visual flicker validation.",
+  "results": [
+    "/workspace/work/medical52/output/zomboid-zombie-gore-1.0.20-neoforge-1.21.1-filled-wounds-search.36.jar verified 173 classes\n/workspace/work/medical52/output/ragdollified-1.21.1-1.1.5-continuous-corpse-pose.29.jar verified 1139 classes\n/workspace/work/medical52/output/zombie-remains-loot-1.6.1-neoforge-1.21.1-quietly-search.25.jar verified 80 classes\n/workspace/work/medical52/output/quietly-1_0_0-cooldown-v19-ragdoll-search.jar verified 71 classes\n/workspace/work/medical52/output/flashlight-5.1-neoforge-1.21.1-iris-terrain-programs.19.jar verified 53 classes\n",
+    "",
+    "MEDICAL_BATCH_LIFETIME_FULL_SIZE_TORSO_AND_SINGLE_OWNER_CHECKS=14\n",
+    "PHYSICAL_ARMOR_PIVOT_AND_HUMAN_LOCAL_CUT_CHECKS=12\n",
+    "SEARCH_CORPSE_LOOT_POSE_HUMAN_ARMOR_CHECKS=20\n",
+    "",
+    "IRIS_PACKED_CHUNK_PROGRAM_AND_STATE_RESTORATION=PASS\n",
+    "LIGHT_FADE_FRAME_STALL_AND_SELECTION_HYSTERESIS_CHECKS=126\n",
+    "OFFSCREEN_RENDERER llvmpipe (LLVM 19.1.7, 256 bits)\nPORTABLE_FLASHLIGHT_GLSL150_COMPILE_AND_LINK=PASS\n",
+    "ACTUAL_BULLET_TICK_REFLECTION_CORPSE_HIT=PASS\nACTUAL_BULLET_CORPSE_CONTAINER_OCCLUSION_AND_POSED_RAY=PASS\n \n \nMOVING_ZOMBIE_ALL_REGIONS_ENTRY_SURFACE_AND_BODY_YAW_CHECKS=217\n \n \nMEDICAL_POSTURE_PERSISTENCE_HEALING_CORPSE_AND_COLLISION_CHECKS=4030\n \n \n"
+  ],
+  "jar_integrity": "CRC and no Minecraft compilation stubs bundled: PASS"
+}
