@@ -1,0 +1,10 @@
+{
+  "results": [
+    "PASS: actual reflective bone replacement, 56 combinations, independent hands, idle, foreign rig, finite continuous targets and interaction envelope",
+    "PASS: interaction first/third, sleeve sync, right arm unchanged, native render forwarded once, other player/world isolation",
+    "PASS: late bones after native update, before render/cleanup; left-only native render hook; right arm untouched",
+    "FIRST_PERSON_MIXIN_RETENTION_DESCRIPTOR_SLOTS_PUSH_SCOPE_AND_LR_HOOK=PASS"
+  ],
+  "full_minecraft_runtime": false,
+  "preview": "Offline Bedrock fallback-arm geometry driven by Java-exported control-bone targets; not a gameplay recording."
+}
