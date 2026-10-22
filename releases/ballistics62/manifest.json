@@ -1,0 +1,29 @@
+{
+  "release": "ballistics62",
+  "minecraft": "1.21.1",
+  "loader": "NeoForge",
+  "inputs": [
+    {
+      "file": "zomboid-zombie-gore-1.0.20-neoforge-1.21.1-remains-cargo.41.jar",
+      "sha256": "ee571da0d677370d8a308bb1a9869d508ba61005339d3fb7e78446599f2557b7"
+    },
+    {
+      "file": "tacz-neoforge-1.21.1-1.1.8-hotfix-r7-third-person-pz.20-wall-low-ready.jar",
+      "sha256": "a3dc69cdffaeb50495b4edde185a4d664c3c4337a3c846fbd0fe02798c3a9cf8"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "tacz-neoforge-1.21.1-1.1.8-hotfix-r7-third-person-pz.22-low-ready-door.jar",
+      "bytes": 58708361,
+      "sha256": "265ad8af6982e966a8242dc75cb4072e53d5224ffecf69d55b3a31971313aa37"
+    },
+    {
+      "file": "zomboid-zombie-gore-1.0.20-neoforge-1.21.1-weapon-power.42.jar",
+      "bytes": 452700,
+      "sha256": "693e8b94a72ce51795f9424a6fd409b908e65bde0c791219bf0dd0c672774c75"
+    }
+  ],
+  "ragdoll_replacement": false,
+  "full_modpack_runtime_tested": false
+}

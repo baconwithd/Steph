@@ -1,0 +1,16 @@
+{
+  "results": [
+    "PASS Power62: 24046 assertions; real projectile metadata, monotonic damage, pellet clusters, head sentinel, corpse context, death packet and client velocity, dedup, melee and explosion preservation, bounded caches.",
+    "PASS: interaction first/third, sleeve sync, right arm unchanged, native render forwarded once, other player/world isolation",
+    "PASS Contract62: 4943 archive and bytecode checks; changed classes limited to intended hooks, assets and gun ballistics untouched, both arm models lower, real projectile API verified."
+  ],
+  "ASM_BasicVerifier_classes": {
+    "gore": 192,
+    "tacz": 1073
+  },
+  "full_minecraft_runtime": false,
+  "limitations": [
+    "No modpack gameplay or visual validation in this environment.",
+    "Ragdoll .32 was identified in the supplied log; stable native spawn API was inspected in available .31, with no ragdoll JAR replaced."
+  ]
+}
