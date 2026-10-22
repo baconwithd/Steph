@@ -1,0 +1,15 @@
+{
+  "release": "death65",
+  "minecraft": "1.21.1",
+  "loader": "NeoForge",
+  "replace_only": "First Aid .25",
+  "keep": "Survivor Creator v38",
+  "previous_firstaid_sha256": "34d6ac4f85a52b029d45560421963f325ea3236eda0b5baa9cbe29f62703b16d",
+  "output": {
+    "file": "firstaid-1.21.1-ZOMBOID-v3.6.26-death-font-chat.jar",
+    "bytes": 2051262,
+    "sha256": "8d7301ad5ba2dc1f701aa9f3d8cb41c4b139d0d8c637d02e22dbaf41a89f1365"
+  },
+  "full_modpack_runtime_tested": false,
+  "survivor38_content_unchanged": true
+}
