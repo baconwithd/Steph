@@ -1,0 +1,13 @@
+{
+  "results": [
+    "FINITE_SMOOTH_CURVES_DISTINCT_ACTIONS_AND_PARTS_OFFSET_RESTORE_SYNC_CHECKS=1746342",
+    "NATIVE_LR_ASSET_DURATION_AND_MIXIN_REGISTRATION=PASS",
+    "FIRST_PERSON_MIXIN_RETENTION_DESCRIPTOR_SLOTS_PUSH_SCOPE_AND_LR_HOOK=PASS"
+  ],
+  "full_minecraft_run": false,
+  "additional_runtime_fixtures": [
+    "PRODUCTION_FIRST_PERSON_APPLY_LR_BRIDGE_METADATA_PARTS_CUES_EXPIRY=PASS",
+    "LR_OPTIONAL_FIRSTAID_ABSENT=PASS"
+  ],
+  "bytecode": "/workspace/work/medical57/output/firstaid-1.21.1-ZOMBOID-v3.6.20-anatomical-treatment-motion.jar verified 295 classes\n/workspace/work/medical57/output/LesRaisins-Tactical-Equipements-1.21.1-0.4.3-medical-view.5.jar verified 218 classes\n"
+}

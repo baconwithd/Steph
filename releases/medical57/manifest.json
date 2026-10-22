@@ -1,0 +1,17 @@
+{
+  "release": 57,
+  "firstaid": "3.6.20",
+  "reference_commit": "18f20af4faca6802599564fa044b1faad0c981c8",
+  "files": [
+    {
+      "name": "LesRaisins-Tactical-Equipements-1.21.1-0.4.3-medical-view.5.jar",
+      "sha256": "251a23c5ef2ada01e86dd71f45192d2e7ca0042e0ba2ec3a08107c828e0ff128",
+      "bytes": 6613016
+    },
+    {
+      "name": "firstaid-1.21.1-ZOMBOID-v3.6.20-anatomical-treatment-motion.jar",
+      "sha256": "bb05166645fedf77788d3fb73b76071ee09826575af0a9dadace751e79cda373",
+      "bytes": 1656739
+    }
+  ]
+}
