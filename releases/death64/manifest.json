@@ -1,0 +1,29 @@
+{
+  "release": "death64",
+  "minecraft": "1.21.1",
+  "loader": "NeoForge",
+  "inputs": [
+    {
+      "file": "firstaid-1.21.1-ZOMBOID-v3.6.24-unified-health-splint-game.jar",
+      "sha256": "9d666fbf657c7c1159eb40818ae4c2f61fc4302e8ecbf41c973aa5601b178349"
+    },
+    {
+      "file": "survivorcreator-neoforge-1.21.1-1.0.9-zomboid-v37-package-conflict-fix.jar",
+      "sha256": "ebfec4bd2bc7ee6b0c5c458199c2677de758250b549d71d6e5eb584fe9d6ab79"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "firstaid-1.21.1-ZOMBOID-v3.6.25-pz-death-camera.jar",
+      "bytes": 2051266,
+      "sha256": "34d6ac4f85a52b029d45560421963f325ea3236eda0b5baa9cbe29f62703b16d"
+    },
+    {
+      "file": "survivorcreator-neoforge-1.21.1-1.0.9-zomboid-v38-deferred-character-respawn.jar",
+      "bytes": 9706565,
+      "sha256": "86fc96a3d03ddbb63454aee46eb6d182f0c3dd758aaf59f5a761372cd54f77cc"
+    }
+  ],
+  "full_modpack_runtime_tested": false,
+  "replace_both_client_and_server": true
+}

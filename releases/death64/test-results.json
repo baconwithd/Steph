@@ -1,0 +1,9 @@
+{
+  "runtime_tests": [
+    "PASS Server64: 18 checks; actual death notice, validation before one replacement, native grant target, malformed zone rejection, hardcore, stale submissions, no late summary.",
+    "PASS Death64: 140 checks; actual patched screen, PZ layout and font, fixed death anchor, creation without respawn, late packet suppression, success restores camera, revive and reconnect lifecycle.",
+    "PASS Contract64: 1630 checks; unchanged medical/creation content, required client respawn mixin, death tick notification, server gate, native screen input, licensed font, no stubs shipped."
+  ],
+  "full_minecraft_runtime": false,
+  "fixture_note": "Game APIs and old medical helpers are test doubles. New renderer, client hold, native patched FinalScreen and server helper are production code."
+}
