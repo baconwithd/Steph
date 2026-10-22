@@ -1,0 +1,23 @@
+TacZ NPCs tactical.45-immersion — Minecraft 1.21.1 / NeoForge
+Base: el JAR tactical.44-context-null-guard adjunto.
+
+INSTALACIÓN
+Cierra Minecraft y sustituye el JAR anterior en mods por este archivo. Deja una sola versión de tacznpcs. Conserva las dependencias de tu instalación actual. Reinicia el juego o el servidor.
+Los diálogos nuevos se incorporan en memoria a la configuración existente al cargar y normalizar los datos; no hace falta borrar tus NPCs ni la configuración.
+
+CAMBIOS
+- El compañero puede seguir al dueño mientras conversa. Sacar el arma o correr no cancela su charla. Se mantienen las restricciones de peligro y daño.
+- Variantes de diálogo según personalidad y confianza; selección sin repetir consecutivamente la misma variante cuando hay alternativas válidas. Algunas frases existentes conservan su texto.
+- Nueva rama personal, accesible después de preguntar por su pasado. Interacciones de compañía, escucha y apoyo con umbrales de confianza 30, 60 y 85. Incluye una amenaza explícita con pérdida de confianza y miedo.
+- Compañeros reclutados pueden conversar entre ellos cuando su dueño está cerca y quieto.
+- Hostiles: al detectar un arma dirigida hacia su cuerpo con la mira central, rompen la negociación y adquieren al jugador como objetivo sin la espera social habitual. El disparo efectivo sigue dependiendo de su arma y del sistema de combate existente.
+- Hostiles ante un jugador desarmado: piden comida o munición y dan hasta 20 segundos. Puedes soltar provisiones cerca del NPC, a 3 bloques; si logra recogerlas, concede una tregua de 60 segundos. La cantidad transferida sigue las reglas de saqueo existentes y puede abarcar la pila ofrecida. No se extraen objetos directamente del inventario del jugador.
+- Última exclamación textual al morir: “Arghh…”, “N-no…”, etc. Se bloquean las reacciones sociales y voces de enfado de NPCs muertos. No se han añadido grabaciones de voz nuevas.
+- Disparos cercanos interrumpen el saqueo. NPCs armados con buena salud o sin comida pueden investigar durante un tiempo limitado; los compañeros no abandonan su seguimiento para hacerlo.
+- Ancho de colisión de 0,75 a 0,60 bloques para mejorar el paso por marcos abiertos. Altura conservada.
+
+VERIFICACIÓN REALIZADA
+Compilación con Java 21; validación del esquema de diálogos con el validador del mod; integración de diálogos idempotente; verificación JVM de las clases tácticas modificadas; 100 selecciones sin repetición consecutiva. Prueba con objetos simulados: seguimiento durante conversación, actualización de ruta, parada junto al dueño, excepciones de arma/carrera y bloqueo de expresiones de un NPC muerto.
+
+PENDIENTE DE COMPROBAR EN MINECRAFT
+No se ejecutó un cliente o servidor Minecraft aquí. Los disparos, recogida de provisiones, integración con otros mods, investigación de ruidos y paso real por puertas necesitan prueba en partida. La modificación de la entidad principal conserva el bytecode original salvo el ancho de colisión; su carga completa requiere Minecraft y sus dependencias.
