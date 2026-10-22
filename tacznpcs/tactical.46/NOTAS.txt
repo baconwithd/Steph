@@ -1,0 +1,21 @@
+TacZ NPCs tactical.46 — corrección de integración de tactical.45
+Minecraft 1.21.1 / NeoForge. Mantener las dependencias del JAR original.
+
+Instalación: cerrar el juego, retirar tactical.44/tactical.45 de mods y colocar únicamente el nuevo JAR. En multijugador, actualizar también el servidor. Reiniciar por completo.
+
+Correcciones comprobadas mediante simulación:
+1. La conversación ya no envía stop() a la navegación del compañero que sigue al dueño. Antes lo hacía cada seis ticks y la prueba anterior solo ejercitaba la rutina auxiliar; no cubría este conflicto. La nueva prueba ejecuta Authority70.busy durante 80 ticks y comprueba que siga actualizando la ruta sin detenerse; cerca del dueño sí se detiene.
+2. El filtro de emisión de sonidos ya no descarta a NPCs vivos por estar ocupados saqueando. Se comprueba la cadena Sense28.emit -> hear -> liberación del saqueo -> investigación -> Life79.work -> navegación, con objetos simulados.
+3. Los NPCs abatidos (todavía vivos, soc_down20) emiten gemidos textuales y no reproducen voces sociales agresivas. Antes solo se bloqueaban las voces después de la muerte definitiva.
+4. Saludos completos en 8 personalidades y 4 situaciones de relación: desconocido, conocido, confianza alta y compañero. Hay 3 variantes de dos frases por situación y personalidad (192 líneas). Se seleccionan al entrar o retomar una charla abierta. El índice anterior se guarda en el NPC para evitar elegir el mismo saludo consecutivamente.
+5. Una emboscada que no puede prepararse usa un encuentro normal como respaldo; no el diálogo del familiar enfermo.
+
+Se conservan las incorporaciones de tactical.45: rama personal de confianza; reacción hostil a la mira central con arma; extorsión de comida/munición soltada al suelo; última exclamación al morir; investigación condicionada de disparos; colisión de 0,60 bloques de ancho.
+
+Diagnóstico: al actualizar un NPC en el servidor, latest.log debe incluir:
+[TacZ NPCs tactical.46] Runtime active; walking dialogue fix loaded. NPC width=...
+El ancho esperado es aproximadamente 0.6. La versión también figura en la lista de mods.
+
+Límites: no se ejecutó Minecraft. No se considera comprobado el paso por puertas, la animación/disparo real del arma ni la compatibilidad con el resto del modpack. Las pruebas usan las clases tácticas reales y sustituyen las APIs de Minecraft y el transporte de paquetes por objetos de prueba. La transacción de objetos ofrecidos para extorsión conserva el mecanismo de saqueo original y no está probada en una partida.
+
+Si todo continúa igual, adjuntar logs/latest.log completo y una captura de la lista de mods: el marcador anterior permite comprobar si esta versión se está ejecutando o si hay un error de integración. No se requiere borrar mundos ni NPCs.
