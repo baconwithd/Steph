@@ -1,0 +1,31 @@
+{
+  "results": [
+    "PASS 2492 leg/action/frame cases; maximum palm contact error in pixels: third=3.9966235E-6, first=7.996802E-6; correct side, outer surface, grounded standing foot and old-patch rejection",
+    "PASS: real optional LR bridge -> reflective leg draw, selected side, player skin, model-space alignment, idle, shared-model restoration and render failure cleanup",
+    "PASS: late leg render with exact native argument slots before cleanup; third-person contact dispatch connected",
+    "PASS: late bones after native update, before render/cleanup; left-only native render hook; right arm untouched",
+    "FIRST_PERSON_MIXIN_RETENTION_DESCRIPTOR_SLOTS_PUSH_SCOPE_AND_LR_HOOK=PASS"
+  ],
+  "audit": {
+    "firstaid-1.21.1-ZOMBOID-v3.6.23-leg-contact-ik.jar": {
+      "changed": [
+        "dev/zomboid/firstaid/FirstPerson57.class",
+        "dev/zomboid/firstaid/FirstPerson58.class",
+        "dev/zomboid/firstaid/MedicalMotion.class"
+      ],
+      "added": [
+        "dev/zomboid/firstaid/Contact60.class"
+      ]
+    },
+    "LesRaisins-Tactical-Equipements-1.21.1-0.4.3-medical-leg-view.7.jar": {
+      "changed": [
+        "me/xjqsh/lrtactical/client/renderer/item/ConsumableItemRenderer.class"
+      ],
+      "added": [
+        "me/xjqsh/lrtactical/compat/firstaid/MedicalLimb60.class"
+      ]
+    }
+  },
+  "full_minecraft_runtime": false,
+  "preview": "Offline native first-person rig and pure third-person contact poses; no gameplay recording"
+}
