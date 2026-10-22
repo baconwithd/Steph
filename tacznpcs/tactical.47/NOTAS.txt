@@ -1,0 +1,47 @@
+TacZ NPCs tactical.47 — encuentros al apuntar, recuperación de rutas y refugios
+Minecraft 1.21.1 / NeoForge; base tactical.44-context-null-guard del usuario.
+
+INSTALACIÓN
+Cerrar Minecraft. Retirar versiones anteriores de tacznpcs de mods y dejar solo el JAR tactical.47. En multijugador actualizar también el servidor. Reiniciar. Conservar dependencias del modpack; no borrar el mundo, NPCs ni configuración.
+
+AL APUNTAR
+- El rayo central se compara con el volumen del NPC, incluyendo cabeza y torso; antes apuntar a la cabeza podía no detectarse.
+- A menos de 12 bloques, con visión libre y sin disparos recientes ni otra amenaza inmediata, el NPC inicia un encuentro al detectarte apuntándole con un arma. Puede mostrar confusión, miedo o enojo según relación, equipo y medidores.
+- Opciones: extorsionar, decir que era una broma, o anunciar que bajas el arma para tranquilizarlo.
+- Extorsionar puede transferir una unidad de sus pertenencias usando la transacción del diálogo. Un NPC armado con poco miedo puede negarse y entrar en combate. La amenaza explícita afecta la confianza incluso si es compañero.
+- La respuesta de broma no borra el mal gesto: pierde confianza y concede una tregua. Si ignoras al NPC, un hostil puede combatir; otros intentan retirarse. Hay enfriamiento para evitar repetir el encuentro continuamente.
+- Sacar un arma ante un compañero, sin apuntarle, sigue sin considerarse una amenaza.
+
+PUERTAS Y OBSTÁCULOS
+- Se conserva la colisión de 0,60 bloques.
+- Al atascarse, intenta un desplazamiento físico corto alrededor del panel. No se teletransporta.
+- Si no consigue avanzar, busca una ruta completa hacia otro punto exterior y mantiene el desvío sin que las órdenes repetidas lo cancelen. Descarta rutas que pasan por la misma celda bloqueada. Puede abrir puertas de madera.
+- Si no hay salida alcanzable y el bloqueo persiste, golpea y rompe un bloque próximo que impide pasar. Hay progreso visible y demora según dureza; después recalcula. Puede necesitar quitar el bloque superior e inferior.
+- Respeta mobGriefing, territorios protegidos y eventos de destrucción. No rompe bloques con inventario/entidad, irrompibles, portales ni bloques de administración; limita dureza a 12. Si la protección impide romper, no fuerza la destrucción.
+
+TALA Y REFUGIO
+- Búsqueda de árboles cercanos primero: hasta 512 posiciones por acción, frente a las 32 anteriores. Comprueba tronco natural apoyado en tierra y hojas; no cosecha paredes de troncos como árboles.
+- Acciones de refugio cada 10 ticks; sigue necesitando varios golpes por tronco. La madera se convierte con las recetas del mundo en tablas y mesa, y se consume al construir.
+- Hojas y ramas ya no cuentan como techo definitivo. Se descarta un hogar antiguo registrado bajo una copa de árbol.
+- Busca un refugio existente con suelo y techo sólidos y una ruta completa. Si no encuentra uno, evalúa sitios para un refugio compacto; la obra tiene prioridad sobre caza, minería y búsqueda secundaria.
+- Si la propia mesa/paredes bloquean el punto de trabajo, busca otro lugar alcanzable desde el que colocar el bloque, incluso rodeando la obra.
+- Los compañeros conservan la prioridad de seguir/esperar a su dueño.
+
+PRUEBAS
+Se usaron clases tácticas reales con APIs de Minecraft simuladas, no un cliente Minecraft:
+1. Encuentro completo: detección de cabeza, envío de opciones clicables, selección de broma y tregua. Extorsión con débito/crédito exacto de una unidad.
+2. Habitación con segunda salida: la utiliza sin romper. Habitación cerrada: golpea, despeja y cruza. mobGriefing y territorio protegido impiden destruir.
+3. Techo sólido frente a hojas; receta de troncos -> tablas -> mesa; uso de materiales y finalización de la obra.
+4. Ciclo automático desde mochila vacía: descarta hogar bajo hojas, escoge sitio, tala, fabrica y termina el refugio en el mundo simulado.
+5. Regresiones: seguimiento durante conversación/carrera, voces al morir/abatirse, audición durante saqueo, variantes y validación de diálogos.
+
+No se ha ejecutado tu modpack. El tiempo de la simulación no garantiza un plazo dentro de Minecraft; terreno, hambre, peligro, protecciones, recetas y chunks cargados pueden impedir o retrasar el trabajo. Falta verificar visualmente estas conductas con las barricadas y puertas exactas de los videos.
+
+RECUPERACIÓN DE NPCs ANTIGUOS
+Al actualizar se reintenta una sola vez la IA de los NPCs desactivados por un error de una versión anterior. No se borra su identidad ni inventario. Si vuelven a fallar, se conserva el bloqueo de seguridad y el error queda en el registro. La opción global enabled=false se respeta.
+
+DIAGNÓSTICO
+latest.log debe incluir: [TacZ NPCs tactical.47] Runtime active; weapon encounters, route recovery and shelter progress loaded.
+Los estados se registran en npc47_ruta y npc77_refugio_estado. Si vuelve a bloquearse, adjuntar logs/latest.log y el nuevo video permite distinguir un fallo de ruta, protección, receta o integración.
+
+SHA-256 del JAR: 8eb23a68fa9c13d84a5baecee637a5984c4161577844315b917f3806cb4246e6
