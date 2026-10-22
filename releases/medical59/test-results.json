@@ -1,0 +1,47 @@
+{
+  "results": [
+    "PASS: actual reflective bone replacement, 56 combinations, independent hands, idle, foreign rig, finite continuous targets and interaction envelope",
+    "PASS: restart on repeated treatment of same site, site/action switch and use restart",
+    "PASS: 56 distinct temporal paths per view after removal of static offsets; no common 22-tick loop",
+    "PASS: late bones after native update, before render/cleanup; left-only native render hook; right arm untouched",
+    "FIRST_PERSON_MIXIN_RETENTION_DESCRIPTOR_SLOTS_PUSH_SCOPE_AND_LR_HOOK=PASS"
+  ],
+  "motion_comparison": {
+    "first": {
+      "distinct_movement_sequences": 56,
+      "minimum_normalized_distance": 0.4704274719614737,
+      "closest_pair": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          6
+        ]
+      ]
+    },
+    "third": {
+      "distinct_movement_sequences": 56,
+      "minimum_normalized_distance": 0.38570534682597385,
+      "closest_pair": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          6
+        ]
+      ]
+    }
+  },
+  "changed": [
+    "dev/zomboid/firstaid/FirstPerson58.class",
+    "dev/zomboid/firstaid/MedicalMotion.class"
+  ],
+  "added": [
+    "dev/zomboid/firstaid/Motion59.class"
+  ],
+  "full_minecraft_runtime": false
+}
