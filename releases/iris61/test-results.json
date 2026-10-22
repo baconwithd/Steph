@@ -1,0 +1,15 @@
+{
+  "results": [
+    "PASS: literal } on US and Spanish-style layouts; no ], old R, chat/menu, foreign window or autorepeat; one reload per press; saved-R migration and custom bindings preserved",
+    "PASS: KeyboardHandler mixin retention, exact descriptors/slots, required injections, and single native Iris reload/error-handler path"
+  ],
+  "changed": [
+    "mixins.iris.json",
+    "net/irisshaders/iris/Iris.class"
+  ],
+  "added": [
+    "dev/zomboid/iriskeys/Reload61.class",
+    "net/irisshaders/iris/mixin/MixinReloadBrace61.class"
+  ],
+  "full_minecraft_runtime": false
+}
