@@ -1,0 +1,42 @@
+TacZ NPCs tactical.48 — bases y tareas con propósito
+Minecraft 1.21.1 / NeoForge. Mantiene los cambios de tactical.47.
+
+INSTALACIÓN
+Cerrar Minecraft. Retirar los JAR anteriores de tacznpcs y dejar únicamente tactical.48. En multijugador actualizar también el servidor. Reiniciar; no borrar el mundo ni los NPCs. La lista de mods y el log deben mostrar tactical.48-bases-and-purpose.
+
+CÓMO IDENTIFICAR LA BASE
+- Al estar a 8 bloques del centro aparece en la barra de acción «Zona de base | Base de [nombre] | X,Y,Z | estado | tarea». Es un radio de referencia del asentamiento, no una protección de terreno.
+- Al acercarte a un NPC residente también muestra las coordenadas de su base y qué está haciendo. Un NPC sin base muestra «Sin base».
+- El cofre y el horno que coloca llevan el nombre «Base de [nombre]». El cofre contiene objetos reales que puedes inspeccionar.
+- Centro, dueño, mobiliario y concesión del equipo inicial quedan guardados en los datos del NPC, incluso al recargar la partida.
+
+ASENTARSE Y AMUEBLAR
+- Un refugio necesita techo sólido, suelo, espacio transitable y ruta completa para convertirse en base principal. Los árboles no cuentan como casa.
+- Las nuevas construcciones son de 4x4 interiores, con espacio para muebles. También pueden aprovechar un refugio existente adecuado.
+- El juego entrega una sola vez mesa, horno, cama y cofre, más pico, hacha y espada de madera para arrancar las tareas. Lo que ya tiene no se entrega otra vez; la mesa de una construcción propia cuenta como mesa instalada.
+- El NPC lleva y coloca el mobiliario por etapas. La cama se coloca con sus dos mitades y orientación correspondiente.
+- Cada colocación comprueba que no cierre rutas transitables existentes; evita puertas y mantiene acceso al mobiliario. Respeta mobGriefing, permisos de territorio y cancelaciones de eventos.
+- Compañeros del mismo refugio pueden compartir la base del constructor y su mobiliario, sin generar otro kit. Si un mueble ya instalado desaparece, no recibe infinitos reemplazos gratuitos: se muestra el mueble faltante.
+
+CICLO DE TRABAJO REAL
+- Reúne madera natural con hacha para construcción y abastecimiento. Busca piedra y minerales expuestos fuera de la base con pico adecuado; no excava sus propios cimientos ni túneles bajo el NPC.
+- Las herramientas cambian entre mochila y mano sin duplicarse, y se desgastan al extraer recursos. No se fuerza la minería de minerales para los que el pico es insuficiente.
+- Regresa regularmente a su cofre y deposita las pertenencias, conservando equipo, munición y reservas básicas. Retira materiales del mismo cofre para trabajar.
+- Introduce combustible y materiales reales en el horno; recoge su salida. La fundición la realiza el horno normal de Minecraft. No genera lingotes por un temporizador invisible.
+- Consume adoquín recolectado para reforzar hasta 8 bloques de suelo de su base. Esta primera versión no reconstruye edificios enteros ni implementa un árbol completo de fabricación de equipo.
+- Trabaja con reservas limitadas: no tala ni mina indefinidamente. Si no encuentra un recurso accesible, pasa a vigilar y vuelve a intentar la búsqueda después.
+- Patrulla puntos alcanzables de su base con espada o arma disponible. Ante una agresión real a un residente de la misma base, puede asistir usando el combate existente. Las amenazas interrumpen el trabajo y lo despiertan.
+- Por la noche puede volver a su cama y dormir; se despierta de día. Las órdenes de seguimiento/espera del jugador, la conversación activa y los estados de peligro conservan prioridad sobre estas tareas.
+
+NO QUEDARSE MIRANDO UNA PARED
+- Descansar en un refugio terminado deja de ocupar indefinidamente la IA cuando no necesita resguardarse.
+- Un vigilante de progreso detecta unos 12 segundos sin desplazamiento ni avances de trabajo: libera la ruta/objetivo atascado y busca un punto alternativo transitable, también para NPCs que todavía no tienen base.
+- Las tareas de recursos tienen plazo; si no avanzan, cambian de plan. Se mantienen las recuperaciones de puertas de tactical.47. No se teletransportan.
+- El vigilante no cancela una conversación activa, una orden del jugador o el sueño normal.
+- Al primer arranque de esta versión se permite reintentar una vez los NPCs que quedaron deshabilitados por errores de una versión anterior. No oculta repetidamente errores nuevos ni enciende una IA deshabilitada globalmente.
+
+VALIDACIÓN Y LÍMITES
+Pruebas sobre las clases tácticas reales del JAR, con interfaces de Minecraft sustituidas por fixtures de simulación: casa desde inventario vacío, muebles y cama completa, entrada libre, cofre/horno con inventarios reales simulados, extracción y consumo de piedra, conservación de herramientas, kit persistente, cancelación/rollback de cama, base compartida, recuperación de rutas, seguimiento y diálogo. También valida recursos de diálogo y bytecode.
+No se ha ejecutado Minecraft real con el modpack del usuario. Los videos prueban el fallo de la versión anterior; no prueban que este parche funcione en ese mundo. La geometría de puertas/barricadas de otros mods y el comportamiento visual deben comprobarse en el juego.
+
+SHA-256: a71c6876640cfbbd65c81d2c1a6e4875891f20e42898a63107b63830b74f7272
