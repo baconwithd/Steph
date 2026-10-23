@@ -1,0 +1,55 @@
+Paquete NPC tactical.49 + Remains Loot.28 + Gore.44
+Minecraft 1.21.1 / NeoForge 21.1.255. Parches sobre los JAR aportados por el usuario.
+
+INSTALACIÓN
+Cerrar Minecraft. Sustituir las versiones anteriores de estos TRES mods por los JAR de esta carpeta:
+1) tacznpcs tactical.49-decor-dialogue
+2) zombie-remains-loot useful-loot.28-safe-corpses
+3) zomboid-zombie-gore direct-lethal-damage.44-no-ghost-clones
+No dejar simultáneamente sus versiones anteriores. Actualizar cliente y servidor.
+Conservar doomsday_decoration board-recipe.5, corpse ragdoll-injuries.5 y ragdollified view-culling.32 que se aportaron; no se modificaron esos tres JAR. No borrar el mundo, inventarios ni cadáveres.
+
+NPC Y DOOMSDAY DECORATION
+- Conserva bases, trabajos, seguimiento y cambios anteriores de tactical.48.
+- La integración de decoración es opcional: sin Doomsday, las bases normales siguen funcionando.
+- Cuando su base está equipada, el NPC fabrica y coloca un drawer de madera y una caja de madera. Son contenedores reales: los usa para depositar y retirar pertenencias y materiales, junto con el cofre original.
+- Usa las recetas del mod aportado y componentes de Minecraft (barriles, losas, botón, palos, tablones). Todos los pasos se comprueban contra la receta exacta activa del servidor, incluyendo sus ingredientes y resultado. Los datapacks que quiten o cambien una receta pueden impedir esa fabricación; no se generan muebles gratis ni se consumen materiales al fallar.
+- Elegir la receta exacta es necesario porque board/planking y las losas comparten patrón. No acepta las losas como resultado de intentar crear una barricada.
+- Las recetas se planifican sobre una copia de la mochila y se confirman juntas. Se conservan los sobrantes y los objetos restantes de las recetas.
+- Para las ventanas usa doomsday_decoration:board, el tablón fino orientado del mod. Conserva el vidrio y coloca el refuerzo al lado interior accesible. El propio mod reconoce los boards adyacentes como refuerzo.
+- Limita el trabajo a ocho colocaciones de refuerzo por NPC; evita duplicar una ventana ya reforzada. No tapa puertas ni coloca muebles que corten rutas existentes. Respeta mobGriefing, permisos y cancelaciones de colocación.
+- Las colocaciones automáticas están limitadas a muebles de una celda y boards; no intenta colocar indiscriminadamente decoraciones grandes que necesitan varias celdas. No se ha implementado un menú de órdenes para fabricar todas las decoraciones del catálogo.
+- Se corrigió el error real de tactical.48 en FurnaceBlockEntity.setCustomName. Renombrar el cofre/horno es ahora opcional y compatible con la ausencia del setter: un detalle cosmético no aborta una colocación terminada.
+
+DIÁLOGOS QUE SE SALTABAN
+- El historial de frases ya escuchadas no elimina una respuesta seleccionada para el turno actual. Las variantes siguen eligiéndose con el sistema anterior, pero la cola seleccionada se entrega completa y en orden.
+- Una respuesta válida de una sola línea ya no activa por sí misma el cierre automático «separacion_pacifica».
+- No marca la línea como entregada ni la quita de la cola antes de emitirla.
+- Las charlas libres interrumpidas por peligro conservan las líneas pendientes para reanudarlas mediante el sistema existente (/npcreply). El peligro real sigue interrumpiendo el trabajo/conversación; no se desactiva el combate.
+- Correr siendo desconocido o alejarse demasiado aún puede cerrar una conversación por las reglas existentes. Los compañeros que siguen al dueño conservan las excepciones previas para correr y conversar caminando.
+
+CRASH «IllegalStateException: corpses»
+- Causa encontrada: tras eliminarse un ragdoll con su menú abierto, BodyLoot16.OWNERS ya no contenía el cuerpo. ExpandedBodies.valid dejaba de reconocerlo como cuerpo de ragdoll y accedía al campo «corpses» de un objeto Body, que no lo tiene.
+- La validación reconoce también el tipo del dueño capturado en el menú. Un cuerpo eliminado devuelve false y cierra el menú; no pasa a la validación de cadáveres de bloque ni intenta leer ese campo inexistente.
+- Mantiene las comprobaciones de pertenencia al registro, dimensión, distancia, jugador vivo y bloque correcto para cuerpos de bloque. No borra ni regenera el inventario.
+
+NO DESTRUIR CADÁVERES CON UN GOLPE NORMAL
+- ZombieRemainsLoot.hitCorpse destruía directamente el bloque en el primer clic izquierdo. Ahora cancela esa acción sobre bloques de restos, sin ejecutar destroyBlock ni vaciar el loot.
+- CorpseIntegration.attack también descartaba entidades del mod Corpse al golpearlas. Ahora cancela ese ataque normal al cadáver y no lo elimina.
+- No protege entidades vivas ni bloques ajenos. Se conservan las interacciones deliberadas de gore y el procesamiento con herramienta/clic derecho existentes; no se convierten los cuerpos en entidades globalmente invulnerables a todos los sistemas.
+
+CLONES VISUALES
+- Linked45 ocultaba el modelo normal de Corpse solo mientras existiera un ragdoll pendiente/activo. Si gore retiraba ese ragdoll, el modelo normal podía aparecer otra vez como un cuerpo sin gore.
+- Una entidad que ya mostró su ragdoll conserva la ocultación del modelo normal durante su vida en ese cliente; un corpse sin ragdoll todavía mantiene el modelo de respaldo.
+- Se evita repetir la creación por muerte cuando ya hay un cuerpo retenido con el mismo identificador y dimensión. Respeta el identificador del dueño enlazado: no confunde el cuerpo original con el nuevo cuerpo enlazado.
+- No se borran cadáveres cercanos por distancia ni se destruyen inventarios para ocultar una duplicación. Estos cambios cubren las rutas identificadas; otras duplicaciones de otros mods requieren evidencia en juego.
+
+VALIDACIÓN Y LÍMITES
+Se reproducen el fallo del menú abierto al eliminar el ragdoll y los disparadores de eliminación de cadáveres. También se prueban recetas con sus datos originales, conservación de inventarios, fabricación/colocación automática de muebles y ventana, diálogos repetidos/cortos y reanudación; se mantienen las regresiones de bases, rutas y seguimiento.
+Las clases de los JAR parcheados se ejecutan con fixtures de las APIs de Minecraft. No se ha arrancado el modpack real: falta verificar orientación visual, gore y convivencia de todos los mods en el mundo del usuario.
+El último registro aportado además contiene 6492 cambios repetidos de distancia de visión entre 12 y 66. Esa configuración/carga del modpack no está corregida por este paquete.
+
+SHA-256:
+tacznpcs-2.1.0-1.21.1-tactical.49-decor-dialogue.jar 09482c4dc57f7f66ff06ccfa3c77972aa29ad1dbf3c13f7366bcae6e266e5274
+zombie-remains-loot-1.6.1-neoforge-1.21.1-useful-loot.28-safe-corpses.jar 8a54f21740af3f0de04ddac706f2586b391203c2dba6a29ec48dd32beefca4ab
+zomboid-zombie-gore-1.0.20-neoforge-1.21.1-direct-lethal-damage.44-no-ghost-clones.jar ecd75f0788376d5ba4776fbcb5976361419b8bec319c0727e2e93663ffc57a6f
